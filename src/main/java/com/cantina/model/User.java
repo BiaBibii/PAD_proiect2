@@ -12,6 +12,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -20,6 +21,7 @@ import com.cantina.model.security.Authority;
 import com.cantina.model.security.UserRole;
 
 @Entity
+@Table(name = "user")
 public class User implements UserDetails {
 	
 	@Id
@@ -96,7 +98,7 @@ public class User implements UserDetails {
 	@Override
 	public boolean isAccountNonExpired() {
 		// TODO Auto-generated method stub
-		return false;
+		return true;
 	}
 
 	@Override
