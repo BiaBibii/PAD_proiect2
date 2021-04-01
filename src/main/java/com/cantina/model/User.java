@@ -40,6 +40,14 @@ public class User implements UserDetails {
 	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	private Set<UserRole> userRoles = new HashSet<>();
 
+	public Set<UserRole> getUserRoles() {
+		return userRoles;
+	}
+
+	public void setUserRoles(Set<UserRole> userRoles) {
+		this.userRoles = userRoles;
+	}
+
 	public long getId() {
 		return id;
 	}
@@ -116,15 +124,8 @@ public class User implements UserDetails {
 	@Override
 	public boolean isEnabled() {
 		// TODO Auto-generated method stub
-		return true;
+		return false;
 	}
 
-	public void setEnabled(boolean enabled) {
-		this.enabled = enabled;
-	}
 	
-	public boolean getEnabled() {
-		return enabled;
-	}
-
 }
