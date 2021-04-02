@@ -14,11 +14,16 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.LazyToOne;
+import org.hibernate.annotations.LazyToOneOption;
+import org.hibernate.annotations.NotFound;
+import org.hibernate.annotations.NotFoundAction;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import com.cantina.model.security.Authority;
 import com.cantina.model.security.UserRole;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "user")
@@ -35,9 +40,12 @@ public class User implements UserDetails {
 	
 	@Column(name="email", nullable = false, updatable = false)
 	private String email;
-	private boolean enabled = true;
+
 	
-	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@JsonIgnore
+	@NotFound(action = NotFoundAction.IGNORE)
+    @LazyToOne(LazyToOneOption.NO_PROXY)
 	private Set<UserRole> userRoles = new HashSet<>();
 
 	public Set<UserRole> getUserRoles() {

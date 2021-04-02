@@ -14,7 +14,6 @@ import com.cantina.service.UserService;
 @Service
 public class UserServiceImpl implements UserService {
 
-	
 	@Autowired
 	private UserRepository userRepository;
 	
@@ -38,7 +37,7 @@ public class UserServiceImpl implements UserService {
 		User localUser = userRepository.findByUsername(user.getUsername());
 
         if (localUser != null) {
-            throw new Exception("User already exists. Nothing will be done."); 
+            throw new Exception("Username " + localUser.getUsername() + " already exists. Nothing will be done."); 
        
         } else {
             for (UserRole ur : userRoles) {
@@ -55,8 +54,14 @@ public class UserServiceImpl implements UserService {
 		
 	}
 
-	
-	
-	
+	@Override
+	public User findByUsername(String username) {
+		return userRepository.findByUsername(username);
+	}
+
+	@Override
+	public User findById(Long id) {
+		return userRepository.findById(id).get();
+	}
 
 }
