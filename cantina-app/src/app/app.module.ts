@@ -10,6 +10,7 @@ import { AcasaComponent } from './acasa/acasa.component';
 import { LoginFormComponent } from './login-form/login-form.component';
 import { RegisterFormComponent } from './register-form/register-form.component';
 import {FormsModule} from "@angular/forms";
+import { ParallaxImageComponent } from './parallax-image/parallax-image.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import {FormsModule} from "@angular/forms";
     ContactComponent,
     AcasaComponent,
     LoginFormComponent,
-    RegisterFormComponent
+    RegisterFormComponent,
+    ParallaxImageComponent
   ],
   imports: [
     BrowserModule,

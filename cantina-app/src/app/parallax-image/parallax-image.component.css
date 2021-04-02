@@ -1,0 +1,7 @@
+.box {
+  height: 75vh;
+  width: 100%;
+  background-size: cover;
+  display: table;
+  background-attachment: fixed;
+}
