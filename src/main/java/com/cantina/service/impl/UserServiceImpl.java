@@ -2,6 +2,8 @@ package com.cantina.service.impl;
 
 import java.util.Set;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,6 +16,8 @@ import com.cantina.service.UserService;
 @Service
 public class UserServiceImpl implements UserService {
 
+	private static final Logger LOG = LoggerFactory.getLogger(UserService.class);
+	
 	@Autowired
 	private UserRepository userRepository;
 	
@@ -37,7 +41,8 @@ public class UserServiceImpl implements UserService {
 		User localUser = userRepository.findByUsername(user.getUsername());
 
         if (localUser != null) {
-            throw new Exception("Username " + localUser.getUsername() + " already exists. Nothing will be done."); 
+        	/* throw new Exception("User already exists. Nothing will be done."); */
+			LOG.info("User already exists. Nothing will be done.", user.getUsername());
        
         } else {
             for (UserRole ur : userRoles) {

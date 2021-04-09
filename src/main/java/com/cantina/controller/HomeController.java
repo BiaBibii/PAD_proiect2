@@ -1,9 +1,11 @@
 package com.cantina.controller;
 
+import java.security.Principal;
 import java.util.HashSet;
 import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.SimpleMailMessage;
@@ -13,6 +15,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -20,6 +23,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.cantina.model.User;
+import com.cantina.model.dao.UserDao;
 import com.cantina.model.security.Role;
 import com.cantina.model.security.UserRole;
 import com.cantina.service.UserService;
@@ -45,14 +49,21 @@ public class HomeController {
 	private UserSecurityService userSecurityService;
 	
 	@PostMapping("/register")
-	public User registerUser(@RequestBody User user) throws Exception {
+	public User registerUser(@RequestBody UserDao user) throws Exception {
 		
 		String tempEmail = user.getEmail();
+		String tempUsername = user.getUsername();
 		
 		if(!tempEmail.equals("") && tempEmail != null) {
 			User newUser = userService.findByEmail(tempEmail);
 			if(newUser != null)
 				throw new Exception("User "+ newUser.getEmail() + " already exists!");
+		}
+		
+		if(!tempUsername.equals("") && tempUsername != null) {
+			User newUser = userService.findByUsername(tempUsername);
+			if(newUser != null)
+				throw new Exception("User "+ newUser.getUsername() + " already exists!");
 		}
 		
 		User newUser = new User();
@@ -67,9 +78,8 @@ public class HomeController {
         role.setId(1);
         role.setName("ROLE_USER");
         Set<UserRole> userRoles = new HashSet<>();
-        userRoles.add(new UserRole(user, role));
+        userRoles.add(new UserRole(newUser, role));
         newUser = userService.createUser(newUser, userRoles);
-		
 		
 		return newUser;
 		
@@ -112,6 +122,17 @@ public class HomeController {
 		}
 	}
 	
+	@RequestMapping(value="/logout")
+	public String logout (HttpServletRequest request, HttpServletResponse response) {
+	  Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+	  if (auth != null){
+	    new SecurityContextLogoutHandler().logout(request, response, auth);
+	  }
+	  return "redirect:/login?logout";
+			  
+			  //"User is logged out";
+	}
+	
 	@RequestMapping("/forgetPassword")
 	public String forgetPassword(HttpServletRequest request, @RequestBody User userFromBody) throws Exception {
 
@@ -139,9 +160,9 @@ public class HomeController {
 	}
 	
 	@PostMapping("/updateUserInformation")
-	public User passwordReset(@RequestBody User user) throws Exception {
+	public User passwordReset(@RequestBody UserDao user, Principal principal) throws Exception {
 		
-		User currentUser = userService.findById(user.getId());
+		User currentUser = userService.findByUsername(principal.getName());
 		
 		if(currentUser == null) {
 			throw new Exception("User not found");
@@ -185,7 +206,4 @@ public class HomeController {
 	}
 	
 	
-
 }
-
-
