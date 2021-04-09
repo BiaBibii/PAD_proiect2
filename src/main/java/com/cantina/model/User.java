@@ -13,6 +13,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import org.hibernate.annotations.LazyToOne;
 import org.hibernate.annotations.LazyToOneOption;
@@ -42,10 +43,8 @@ public class User implements UserDetails {
 	private String email;
 
 	
-	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	@JsonIgnore
-	@NotFound(action = NotFoundAction.IGNORE)
-    @LazyToOne(LazyToOneOption.NO_PROXY)
 	private Set<UserRole> userRoles = new HashSet<>();
 
 	public Set<UserRole> getUserRoles() {

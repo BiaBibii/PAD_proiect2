@@ -1,12 +1,18 @@
 package com.cantina.config;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.web.authentication.logout.LogoutSuccessHandler;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 import com.cantina.service.impl.UserSecurityService;
@@ -45,10 +51,23 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
 		
 		http
 			.csrf().disable().cors().disable()
-			.formLogin().failureUrl("/login?error").permitAll();
+			.formLogin().failureUrl("/login?error").permitAll()
+			.and()
+            .logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+            .logoutSuccessUrl("/?logout").deleteCookies("remember-me").permitAll()
+            .and()
+            .rememberMe();
+		
+		
+		
+		
 			
 	}
 	
+
+	
+
+
 	@Autowired
 	public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
 		auth.userDetailsService(userSecurityService).passwordEncoder(passwordEncoder());
