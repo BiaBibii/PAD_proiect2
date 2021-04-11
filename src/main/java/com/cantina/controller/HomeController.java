@@ -39,7 +39,7 @@ public class HomeController {
         newUser.setUsername(user.getUsername());
         newUser.setEmail(user.getEmail());
 
-        
+         
         String encryptedPassword = SecurityUtility.passwordEncoder().encode(user.getPassword());
         newUser.setPassword(encryptedPassword);
 
