@@ -12,12 +12,11 @@ export class UserService {
   constructor(private http:HttpClient) { }
 
   register(user: User){
-    return this.http.post<User>('http://localhost:8080/api/register',user);
+    return this.http.post<User>(this.url+'register',user);
   }
 
-
-  logIn(){
-
+  logIn(user: User){
+    return this.http.post<User>(this.url+'login',user);
   }
 
   logOut(){

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {LoginFormComponentsService} from "./login-form.components.service";
 import {ActivatedRoute, Router} from "@angular/router";
+import {UserService} from "../services/user.service";
+import {User} from "../models/user";
 
 @Component({
   selector: 'app-login-form',
@@ -8,21 +9,42 @@ import {ActivatedRoute, Router} from "@angular/router";
   styleUrls: ['./login-form.component.css']
 })
 export class LoginFormComponent implements OnInit {
-  email: string | undefined;
+
   password:string |undefined;
   loggedIn:boolean |undefined;
-  constructor(public loginService: LoginFormComponentsService, private router: Router, private route: ActivatedRoute) { }
+  username: string |undefined;
+
+  private user: User|undefined;
+  private error: string|undefined;
+
+  constructor(private userService: UserService, private router: Router, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
   }
 
   onSubmit(form: any) {
-  if(this.loginService.password === form.password && this.loginService.email === form.email){
-    this.loggedIn=true;
-    console.log("Sunt logat")
-    this.router.navigate(['/acasa']);
+    // @ts-ignore
+    this.user=new User(form.username,form.password);
+
+    console.log(this.user);
+      console.log(this.loggedIn);
+      this.userService.logIn(this.user).subscribe( customers => { // success path
+          // to do
+          this.loggedIn=true;
+          console.log(this.loggedIn);
+          this.router.navigate(['acasa']);
+        },
+        error => { // error path
+          console.log(error.error.message);
+        });
+
+
+
+
+
+
    }
-  else this.loggedIn=false;
-  }
+
+
 
 }

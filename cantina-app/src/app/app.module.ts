@@ -15,6 +15,7 @@ import { ParallaxImageComponent } from './parallax-image/parallax-image.componen
 import { GoogleMapsModule } from '@angular/google-maps';
 import { ContactFormComponent } from './contact-form/contact-form.component';
 import { ContactInfoComponent } from './contact-info/contact-info.component'
+import {HttpClientModule} from "@angular/common/http";
 
 @NgModule({
   declarations: [
@@ -33,7 +34,8 @@ import { ContactInfoComponent } from './contact-info/contact-info.component'
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    GoogleMapsModule
+    GoogleMapsModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
