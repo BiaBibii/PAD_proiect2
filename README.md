@@ -20,6 +20,6 @@ Serverul este o aplicatie Java construita cu ajutor framework-ului Spring. Va fu
 
 Pentru a evita supraincarcarea serverului, atunci cand numarul comenzilor depaseste maximul posibil (impus de noi), serverul  gateway se va conecta la brokerul Kafka, care va retine informatia comenzilor pana se elibereaza serverul.
 
-Datele vor fi stocate intr-o baza de date (mongoDB, firebase, Sql).
+Datele vor fi stocate intr-o baza de date (Sql).
 
 
