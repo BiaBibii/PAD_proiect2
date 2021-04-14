@@ -16,6 +16,9 @@ import { GoogleMapsModule } from '@angular/google-maps';
 import { ContactFormComponent } from './contact-form/contact-form.component';
 import { ContactInfoComponent } from './contact-info/contact-info.component'
 import {HttpClientModule} from "@angular/common/http";
+import { ForgetPasswordComponent } from './forget-password/forget-password.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
   declarations: [
@@ -28,14 +31,17 @@ import {HttpClientModule} from "@angular/common/http";
     RegisterFormComponent,
     ParallaxImageComponent,
     ContactFormComponent,
-    ContactInfoComponent
+    ContactInfoComponent,
+    ForgetPasswordComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
     GoogleMapsModule,
-    HttpClientModule
+    HttpClientModule,
+    BrowserAnimationsModule, // required animations module
+    ToastrModule.forRoot(), // ToastrModule added
   ],
   providers: [],
   bootstrap: [AppComponent]
