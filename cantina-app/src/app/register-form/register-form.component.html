@@ -13,7 +13,7 @@
     </div>
     <div class="form-group">
       <div class="form-group">
-        <input class="form-control" type="text" name="telefon" placeholder="Telefon" [(ngModel)]="telefon" required>
+        <input class="form-control" type="text" name="username" placeholder="Username" [(ngModel)]="username" required>
       </div>
       <div class="form-group">
       <input class="form-control" type="email" name="email" placeholder="Email" [(ngModel)]="email" required>
@@ -26,7 +26,7 @@
     </div>
 <!--    <a class="forgot" href="#">Forgot your email or password?</a>-->
 <!--    <a class="forgot" href="#" style="margin: 10px;">Don't have an account? Make one!</a>-->
-<!--    <div *ngIf="loggedIn" [routerLink]="['/acasa']"></div>-->
+    <div *ngIf="registered" [routerLink]="['/login']"></div>
 
     </div>
   </form>
