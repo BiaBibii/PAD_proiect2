@@ -58,10 +58,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
             .and()
             .rememberMe();
 		
-		
-		
-		
-			
 	}
 	
 
