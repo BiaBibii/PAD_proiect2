@@ -134,10 +134,10 @@ public class HomeController {
 	}
 	
 	@PostMapping("/forgetPassword")
-	public String forgetPassword(HttpServletRequest request, @RequestBody String userFromBody) throws Exception {
+	public String forgetPassword(HttpServletRequest request, @RequestBody String email) throws Exception {
 
-		User user = userService.findByEmail(userFromBody);
-
+		User user = userService.findByEmail(email);
+    
 		if (user == null) {
 			throw new Exception("This user doesn't exist!");
 		}
