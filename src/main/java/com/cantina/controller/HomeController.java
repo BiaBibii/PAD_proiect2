@@ -86,7 +86,7 @@ public class HomeController {
 	}
 	
 	@PostMapping("/login")
-	public User login(@RequestBody User user) throws Exception {
+	public User login(@RequestBody UserDao user) throws Exception {
 		
 		User userToLogin = userService.findByUsername(user.getUsername());
 		
@@ -133,10 +133,10 @@ public class HomeController {
 			  //"User is logged out";
 	}
 	
-	@RequestMapping("/forgetPassword")
-	public String forgetPassword(HttpServletRequest request, @RequestBody User userFromBody) throws Exception {
+	@PostMapping("/forgetPassword")
+	public String forgetPassword(HttpServletRequest request, @RequestBody String email) throws Exception {
 
-		User user = userService.findByEmail(userFromBody.getEmail());
+		User user = userService.findByEmail(email);
 
 		if (user == null) {
 			throw new Exception("This user doesn't exist!");
