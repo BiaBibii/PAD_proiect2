@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,Input } from '@angular/core';
 
 @Component({
   selector: 'app-contact',
@@ -6,8 +6,18 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./contact.component.css']
 })
 export class ContactComponent implements OnInit {
+  mapOptions: google.maps.MapOptions = {
+    center: { lat: 45.748204346166304, lng: 21.23992131693315 },
+    zoom : 17
+  };
+  marker = {
+    position: { lat: 45.748204346166304, lng: 21.23992131693315 },
+  };
 
-  constructor() { }
+  img: String;
+  constructor() {
+    this.img="/assets/img/contact_top.jpg"
+  }
 
   ngOnInit(): void {
   }

@@ -1,1 +1,15 @@
-<p>contact works!</p>
+<app-parallax-image [img]="img">
+  <h1 class="text-center">OUR CONTACTS</h1>
+  <p id="p1" class="text-center">Where to find us</p>
+</app-parallax-image>
+
+<app-contact-info></app-contact-info>
+
+<h2 id="hlocation" class="text-center">Our location</h2>
+<google-map [options]="mapOptions" height="500px" width="100%">
+  <map-marker [position]="marker.position"></map-marker>
+</google-map>
+
+<app-contact-form></app-contact-form>
+
+

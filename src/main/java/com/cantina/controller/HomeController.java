@@ -70,7 +70,7 @@ public class HomeController {
         newUser.setUsername(user.getUsername());
         newUser.setEmail(user.getEmail());
 
-        
+         
         String encryptedPassword = SecurityUtility.passwordEncoder().encode(user.getPassword());
         newUser.setPassword(encryptedPassword);
 
@@ -137,7 +137,7 @@ public class HomeController {
 	public String forgetPassword(HttpServletRequest request, @RequestBody String email) throws Exception {
 
 		User user = userService.findByEmail(email);
-
+    
 		if (user == null) {
 			throw new Exception("This user doesn't exist!");
 		}
@@ -154,7 +154,7 @@ public class HomeController {
 				password);
 
 		mailSender.send(newEmail);
-		
+
 		return "email send";
 
 	}

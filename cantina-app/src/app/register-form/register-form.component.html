@@ -1,0 +1,33 @@
+
+<div class="login-clean">
+  <form #loginForm="ngForm" (ngSubmit)="loginForm.form.valid && register(loginForm.value)" action="acasa.html">
+    <h2 class="sr-only">Login Form</h2>
+    <div class="illustration">
+      <h1 style="color: #c59d5f;font-family: Playball, cursive;">Înregistează-te</h1>
+    </div>
+    <div class="form-group">
+      <input class="form-control" type="text" name="nume" placeholder="Nume" [(ngModel)]="nume" required>
+    </div>
+    <div class="form-group">
+      <input class="form-control" type="text" name="prenume" placeholder="Prenume" [(ngModel)]="prenume" required>
+    </div>
+    <div class="form-group">
+      <div class="form-group">
+        <input class="form-control" type="text" name="username" placeholder="Username" [(ngModel)]="username" required>
+      </div>
+      <div class="form-group">
+      <input class="form-control" type="email" name="email" placeholder="Email" [(ngModel)]="email" required>
+    </div>
+    <div class="form-group">
+      <input class="form-control" type="password" name="password" placeholder="Password" [(ngModel)]="password" required>
+    </div>
+    <div class="form-group">
+      <button class="btn btn-primary btn-block" type="submit" style="background-color: rgb(0,0,0);color: #c59d5f;">Înregistează-te</button>
+    </div>
+<!--    <a class="forgot" href="#">Forgot your email or password?</a>-->
+<!--    <a class="forgot" href="#" style="margin: 10px;">Don't have an account? Make one!</a>-->
+    <div *ngIf="registered" [routerLink]="['/login']"></div>
+
+    </div>
+  </form>
+</div>
