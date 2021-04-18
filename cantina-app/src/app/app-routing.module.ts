@@ -18,8 +18,9 @@ const routes: Routes = [
   { path: 'register', component: RegisterFormComponent},
   { path: 'forget-password', component: ForgetPasswordComponent},
   // { path: '**', component: PageNotFoundComponent},
-  { path: 'admin', component: AdminComponent,
+  { path: 'admin',
       children:[
+        { path: '', component: AdminComponent},
         { path: 'add-product', component: AddProductComponent },
         { path: 'edit-products/:id', component: EditProductComponent}
       ]}
