@@ -32,7 +32,8 @@ import { ToastrModule } from 'ngx-toastr';
     ParallaxImageComponent,
     ContactFormComponent,
     ContactInfoComponent,
-    ForgetPasswordComponent
+    ForgetPasswordComponent,
+
   ],
   imports: [
     BrowserModule,
