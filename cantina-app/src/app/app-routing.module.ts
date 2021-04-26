@@ -9,6 +9,7 @@ import {PageNotFoundComponent} from "./page-not-found/page-not-found.component";
 import {AdminComponent} from "./admin/admin.component";
 import {AddProductComponent} from "./add-product/add-product.component";
 import {EditProductComponent} from "./edit-product/edit-product.component";
+import {LoginAuthGuard} from "./login-auth.guard";
 
 const routes: Routes = [
   { path: '',redirectTo:'acasa', pathMatch:'full'},
@@ -19,6 +20,10 @@ const routes: Routes = [
   { path: 'forget-password', component: ForgetPasswordComponent},
   // { path: '**', component: PageNotFoundComponent},
   { path: 'admin',
+     canActivate: [LoginAuthGuard],
+     data: {
+      role: 'ROLE_ADMIN'
+     },
       children:[
         { path: '', component: AdminComponent},
         { path: 'add-product', component: AddProductComponent },
