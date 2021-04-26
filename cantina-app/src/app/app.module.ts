@@ -19,6 +19,11 @@ import {HttpClientModule} from "@angular/common/http";
 import { ForgetPasswordComponent } from './forget-password/forget-password.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { AddProductComponent } from './add-product/add-product.component';
+import { ProductsListComponent } from './products-list/products-list.component';
+import { AdminComponent } from './admin/admin.component';
+import { EditProductComponent } from './edit-product/edit-product.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +38,11 @@ import { ToastrModule } from 'ngx-toastr';
     ContactFormComponent,
     ContactInfoComponent,
     ForgetPasswordComponent,
-
+    PageNotFoundComponent,
+    AddProductComponent,
+    ProductsListComponent,
+    AdminComponent,
+    EditProductComponent
   ],
   imports: [
     BrowserModule,
