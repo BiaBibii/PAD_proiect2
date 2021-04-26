@@ -8,6 +8,8 @@ import java.util.List;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -26,6 +28,7 @@ import com.cantina.service.FoodProductService;
 import com.cantina.service.UserService;
 
 @RestController
+@CrossOrigin(origins="http://localhost:4200")  
 @RequestMapping("/api/foods")
 public class FoodController {
 	
@@ -35,6 +38,7 @@ public class FoodController {
 	@Autowired
 	private UserService userService;
 	
+	
 	@GetMapping("/foodList")
 	public List<FoodProduct> getAllFoodProducts(){
 		List<FoodProduct> foodList = foodProductService.findAll();
@@ -43,21 +47,6 @@ public class FoodController {
 	
 	@PostMapping("/addFoodProduct")
 	public FoodProduct addFoodProduct(@RequestBody FoodProductDao foodProduct, Principal principal) throws Exception {
-		if(principal != null) {
-			int ok = 1;
-			User user = userService.findByUsername(principal.getName());
-			Set<UserRole> userRoles = user.getUserRoles();
-			for(UserRole userRole : userRoles) {
-				Role role = userRole.getRole();
-				if(role.getName().equals("ROLE_ADMIN")) {
-					ok = 0;
-					break;
-				}
-			}
-			
-			if(ok == 1)
-				throw new Exception("No admin privilege for " + user.getUsername());
-		}
 		
 		FoodProduct newFoodProduct = new FoodProduct();
 		newFoodProduct.setTitle(foodProduct.getTitle());
@@ -92,9 +81,7 @@ public class FoodController {
 	
 	@GetMapping("/updateFoodProduct/{id}")
 	public FoodProduct updateFoodProduct(@PathVariable(value = "id") Long id, Principal principal) throws Exception {
-		if(principal != null && !principal.getName().equals("admin")) {
-			throw new Exception("No admin privilege for " + principal.getName());
-		}
+		
 		
 		FoodProduct foodProduct = foodProductService.findById(id);
 		
@@ -104,10 +91,6 @@ public class FoodController {
 	//pune hidden id
 	@PostMapping("/updateFoodProduct")
 	public FoodProduct updateFoodProductPost(@RequestBody FoodProduct foodProduct, Principal principal) throws Exception {
-		
-		if(principal != null && !principal.getName().equals("admin")) {
-			throw new Exception("No admin privilege for " + principal.getName());
-		}
 		
 		FoodProduct updatedFoodProduct = foodProductService.save(foodProduct);
 		
@@ -131,10 +114,6 @@ public class FoodController {
 	
 	@DeleteMapping("/deleteFoodProduct/{id}")
 	public FoodProduct deleteFoodProduct(@PathVariable(value = "id") Long id, Principal principal) throws Exception {
-
-		if(principal != null && !principal.getName().equals("admin")) {
-			throw new Exception("No admin privilege for " + principal.getName());
-		}
 		
 		FoodProduct foodProduct = foodProductService.findById(id);
 		
