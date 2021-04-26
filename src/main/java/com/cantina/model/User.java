@@ -1,51 +1,49 @@
 package com.cantina.model;
 
-import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
-import javax.persistence.Table;
 
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
-
-import com.cantina.model.security.Authority;
-import com.cantina.model.security.UserRole;
+import com.cantina.model.security.Role;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
-public class User implements UserDetails {
-	
+public class User {
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name="id", nullable = false, updatable = false)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	private String username;
-	private String lastName;
 	private String firstName;
-	private String password;
-	
-	@Column(name="email", nullable = false, updatable = false)
-	private String email;
+	private String lastName;
+	//@NotBlank
+	//@Size(max = 20)
+	private String username;
 
-	
-	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-	@JsonIgnore
-	private Set<UserRole> userRoles = new HashSet<>();
-	
-	@OneToOne(cascade = CascadeType.ALL, mappedBy = "user")
-	@JsonIgnore
-	private CantinaCart cantinaCart;
-	
+	public String getFirstName() {
+		return firstName;
+	}
+
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
+
+	public String getLastName() {
+		return lastName;
+	}
+
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
+	}
+
 	public CantinaCart getCantinaCart() {
 		return cantinaCart;
 	}
@@ -54,12 +52,32 @@ public class User implements UserDetails {
 		this.cantinaCart = cantinaCart;
 	}
 
-	public Set<UserRole> getUserRoles() {
-		return userRoles;
+	//@NotBlank
+	//@Size(max = 50)
+	//@Email
+	private String email;
+
+	private String password;
+	
+
+	@ManyToMany(fetch = FetchType.LAZY)
+	@JoinTable(	name = "user_roles", 
+				joinColumns = @JoinColumn(name = "user_id"), 
+				inverseJoinColumns = @JoinColumn(name = "role_id"))
+	
+	private Set<Role> roles = new HashSet<>();
+	
+	@OneToOne(mappedBy = "user",cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@JsonIgnore
+	private CantinaCart cantinaCart;
+	
+	public User() {
 	}
 
-	public void setUserRoles(Set<UserRole> userRoles) {
-		this.userRoles = userRoles;
+	public User(String username, String email, String password) {
+		this.username = username;
+		this.email = email;
+		this.password = password;
 	}
 
 	public Long getId() {
@@ -78,20 +96,12 @@ public class User implements UserDetails {
 		this.username = username;
 	}
 
-	public String getLastName() {
-		return lastName;
+	public String getEmail() {
+		return email;
 	}
 
-	public void setLastName(String lastName) {
-		this.lastName = lastName;
-	}
-
-	public String getFirstName() {
-		return firstName;
-	}
-
-	public void setFirstName(String firstName) {
-		this.firstName = firstName;
+	public void setEmail(String email) {
+		this.email = email;
 	}
 
 	public String getPassword() {
@@ -102,44 +112,11 @@ public class User implements UserDetails {
 		this.password = password;
 	}
 
-	public String getEmail() {
-		return email;
+	public Set<Role> getRoles() {
+		return roles;
 	}
 
-	public void setEmail(String email) {
-		this.email = email;
+	public void setRoles(Set<Role> roles) {
+		this.roles = roles;
 	}
-
-	@Override
-	public Collection<? extends GrantedAuthority> getAuthorities() {
-		Set<GrantedAuthority> authorities = new HashSet<>();
-		userRoles.forEach(ur -> authorities.add(new Authority(ur.getRole().getName())));
-		return authorities;
-	}
-
-	@Override
-	public boolean isAccountNonExpired() {
-		// TODO Auto-generated method stub
-		return true;
-	}
-
-	@Override
-	public boolean isAccountNonLocked() {
-		// TODO Auto-generated method stub
-		return true;
-	}
-
-	@Override
-	public boolean isCredentialsNonExpired() {
-		// TODO Auto-generated method stub
-		return true;
-	}
-
-	@Override
-	public boolean isEnabled() {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	
 }
