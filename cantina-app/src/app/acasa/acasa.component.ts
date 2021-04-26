@@ -10,7 +10,7 @@ import {HttpClient} from "@angular/common/http";
 export class AcasaComponent implements OnInit {
   img_top="/assets/img/contact_top.jpg";
   img_middle="/assets/img/home.gif";
-  constructor(private http:HttpClient) { }
+  constructor() { }
 
   ngOnInit(): void {
 

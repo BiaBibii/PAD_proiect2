@@ -3,7 +3,7 @@ import {ActivatedRoute, Router} from "@angular/router";
 import {UserService} from "../services/user.service";
 import {User} from "../models/user";
 import {ToastrService} from "ngx-toastr";
-import {NavBarComponent} from "../nav-bar/nav-bar.component";
+
 
 @Component({
   selector: 'app-login-form',
@@ -11,8 +11,6 @@ import {NavBarComponent} from "../nav-bar/nav-bar.component";
   styleUrls: ['./login-form.component.css']
 })
 export class LoginFormComponent implements OnInit {
-
-
   password: string | undefined;
   loggedIn = false;
   username: string | undefined;
@@ -40,7 +38,6 @@ export class LoginFormComponent implements OnInit {
         this.toastr.error(error.error.message);
       });
   }
-
 
 
 }

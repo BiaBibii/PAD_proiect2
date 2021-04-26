@@ -1,60 +1,70 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {User} from "../models/user";
-import {Observable} from "rxjs";
-
+import {BehaviorSubject} from "rxjs";
 
 @Injectable({
   providedIn: 'root'
 })
+
 export class UserService {
-  private url='http://localhost:8080/api/';
-  isLogin = false;
-  roleAs: string | null | undefined;
+  private url = 'http://localhost:8080/api/';
 
-  constructor(private http:HttpClient) { }
+  isLogin = new BehaviorSubject<boolean>(false);
+  roleAs = new BehaviorSubject("");
 
-  register(user: User){
-    return this.http.post<User>(this.url+'register',user);
+  constructor(private http: HttpClient) {
+    // get user session
+    const loggedIn = localStorage.getItem('STATE');
+    if (loggedIn == 'true')
+      this.isLogin.next(true);
+    else
+      this.isLogin.next(false);
+
+    //get user role
+    this.roleAs.next(localStorage.getItem('ROLE') ?? "");
   }
 
-  logIn(user: User){
-    return this.http.post<User>(this.url+'login',user);
-  }
-  logInSuccess(username: string){
-  this.isLogin = true;
-  if(username=="admin")
-    this.roleAs ="ROLE_ADMIN";
-  else
-    this.roleAs ="ROLE_USER";
-  localStorage.setItem('STATE', 'true');
-  localStorage.setItem('ROLE', this.roleAs);
+
+  register(user: User) {
+    return this.http.post<User>(this.url + 'register', user);
   }
 
-  logOut(){
-    this.isLogin = false;
-    this.roleAs = '';
+
+  logIn(user: User) {
+    return this.http.post<User>(this.url + 'login', user);
+  }
+
+
+  logInSuccess(username: string) {
+    this.isLogin.next(true);
+    if (username == "admin")
+      this.roleAs.next("ROLE_ADMIN");
+    else
+      this.roleAs.next("ROLE_USER");
+    localStorage.setItem('STATE', 'true');
+    localStorage.setItem('ROLE', this.roleAs.getValue());
+  }
+
+  logOut() {
+    this.isLogin.next(false);
+    this.roleAs.next('');
     localStorage.setItem('STATE', 'false');
     localStorage.setItem('ROLE', '');
-    return this.http.get(this.url+'logout');
+    return this.http.get(this.url + 'logout');
   }
 
   isLoggedIn() {
-    const loggedIn = localStorage.getItem('STATE');
-    if (loggedIn == 'true')
-      this.isLogin = true;
-    else
-      this.isLogin = false;
-    return this.isLogin;
+    return this.isLogin.getValue();
   }
 
   getRole() {
-    this.roleAs = localStorage.getItem('ROLE');
     return this.roleAs;
   }
 
-  forgetPassword(email: string){
-    return this.http.post(this.url+'forgetPassword',email)
+  forgetPassword(email: string) {
+    return this.http.post(this.url + 'forgetPassword', email)
   }
+
 
 }
