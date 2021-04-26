@@ -4,15 +4,15 @@ import {UserService} from "../services/user.service";
 import {User} from "../models/user";
 import {ToastrService} from "ngx-toastr";
 
+
 @Component({
   selector: 'app-login-form',
   templateUrl: './login-form.component.html',
   styleUrls: ['./login-form.component.css']
 })
 export class LoginFormComponent implements OnInit {
-
   password: string | undefined;
-  loggedIn=false;
+  loggedIn = false;
   username: string | undefined;
 
   private user: User | undefined;
@@ -28,10 +28,11 @@ export class LoginFormComponent implements OnInit {
     // @ts-ignore
     this.user = new User(form.username, form.password);
 
-    this.userService.logIn(this.user).subscribe(() => { // success path
+    this.userService.logIn(this.user).subscribe(user => { // success path
         // to do
         this.loggedIn = true;
         this.router.navigate(['acasa']);
+        this.userService.logInSuccess(user.username);
       },
       error => { // error path
         this.toastr.error(error.error.message);
