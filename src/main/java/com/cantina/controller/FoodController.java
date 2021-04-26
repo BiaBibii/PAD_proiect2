@@ -20,12 +20,9 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.cantina.model.FoodProduct;
-import com.cantina.model.User;
 import com.cantina.model.dao.FoodProductDao;
-import com.cantina.model.security.Role;
-import com.cantina.model.security.UserRole;
 import com.cantina.service.FoodProductService;
-import com.cantina.service.UserService;
+
 
 @RestController
 @CrossOrigin(origins="http://localhost:4200")  
@@ -35,9 +32,6 @@ public class FoodController {
 	@Autowired
 	private FoodProductService foodProductService;
 	
-	@Autowired
-	private UserService userService;
-	
 	
 	@GetMapping("/foodList")
 	public List<FoodProduct> getAllFoodProducts(){
@@ -46,7 +40,7 @@ public class FoodController {
 	}
 	
 	@PostMapping("/addFoodProduct")
-	public FoodProduct addFoodProduct(@RequestBody FoodProductDao foodProduct, Principal principal) throws Exception {
+	public FoodProduct addFoodProduct(@RequestBody FoodProductDao foodProduct) throws Exception {
 		
 		FoodProduct newFoodProduct = new FoodProduct();
 		newFoodProduct.setTitle(foodProduct.getTitle());
@@ -80,7 +74,7 @@ public class FoodController {
 	}
 	
 	@GetMapping("/updateFoodProduct/{id}")
-	public FoodProduct updateFoodProduct(@PathVariable(value = "id") Long id, Principal principal) throws Exception {
+	public FoodProduct updateFoodProduct(@PathVariable(value = "id") Long id) throws Exception {
 		
 		
 		FoodProduct foodProduct = foodProductService.findById(id);
@@ -90,7 +84,7 @@ public class FoodController {
 	
 	//pune hidden id
 	@PostMapping("/updateFoodProduct")
-	public FoodProduct updateFoodProductPost(@RequestBody FoodProduct foodProduct, Principal principal) throws Exception {
+	public FoodProduct updateFoodProductPost(@RequestBody FoodProduct foodProduct) throws Exception {
 		
 		FoodProduct updatedFoodProduct = foodProductService.save(foodProduct);
 		
@@ -113,7 +107,7 @@ public class FoodController {
 	}
 	
 	@DeleteMapping("/deleteFoodProduct/{id}")
-	public FoodProduct deleteFoodProduct(@PathVariable(value = "id") Long id, Principal principal) throws Exception {
+	public FoodProduct deleteFoodProduct(@PathVariable(value = "id") Long id) throws Exception {
 		
 		FoodProduct foodProduct = foodProductService.findById(id);
 		

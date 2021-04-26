@@ -1,14 +1,19 @@
 package com.cantina.repository;
 
-import org.springframework.data.repository.CrudRepository;
+import java.util.Optional;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
 import com.cantina.model.User;
 
-public interface UserRepository extends CrudRepository<User,Long>{
-	
-	User findByUsername(String user);
+@Repository
+public interface UserRepository extends JpaRepository<User, Long> {
+	User findByUsername(String username);
+
+	Boolean existsByUsername(String username);
+
+	Boolean existsByEmail(String email);
 	
 	User findByEmail(String email);
-
-
 }
