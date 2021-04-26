@@ -40,6 +40,13 @@ public class FoodProduct {
 	@JsonIgnore
 	private List<FoodProductToCartItem> foodProductToCartItem;
 	
+	public List<FoodProductToCartItem> getFoodProductToCartItem() {
+		return foodProductToCartItem;
+	}
+
+	public void setFoodProductToCartItem(List<FoodProductToCartItem> foodProductToCartItem) {
+		this.foodProductToCartItem = foodProductToCartItem;
+	}
 	
 	private boolean active = true;
 

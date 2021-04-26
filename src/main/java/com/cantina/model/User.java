@@ -23,13 +23,12 @@ import com.cantina.model.security.UserRole;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
-@Table(name = "user")
 public class User implements UserDetails {
 	
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name="id", nullable = false, updatable = false)
-	private long id;
+	private Long id;
 	private String username;
 	private String lastName;
 	private String firstName;
@@ -43,9 +42,18 @@ public class User implements UserDetails {
 	@JsonIgnore
 	private Set<UserRole> userRoles = new HashSet<>();
 	
-	@OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
+	@OneToOne(cascade = CascadeType.ALL, mappedBy = "user")
+	@JsonIgnore
 	private CantinaCart cantinaCart;
 	
+	public CantinaCart getCantinaCart() {
+		return cantinaCart;
+	}
+
+	public void setCantinaCart(CantinaCart cantinaCart) {
+		this.cantinaCart = cantinaCart;
+	}
+
 	public Set<UserRole> getUserRoles() {
 		return userRoles;
 	}
@@ -54,11 +62,11 @@ public class User implements UserDetails {
 		this.userRoles = userRoles;
 	}
 
-	public long getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(long id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
@@ -106,7 +114,7 @@ public class User implements UserDetails {
 	public Collection<? extends GrantedAuthority> getAuthorities() {
 		Set<GrantedAuthority> authorities = new HashSet<>();
 		userRoles.forEach(ur -> authorities.add(new Authority(ur.getRole().getName())));
-		return null;
+		return authorities;
 	}
 
 	@Override

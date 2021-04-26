@@ -46,17 +46,16 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
 		http
 			.authorizeRequests()
 			/*.antMatchers("/**");*/
+			.antMatchers("/api/foods/**").hasRole("ADMIN")
+			.antMatchers("/api/cantinaCart/**").hasRole("USER")
 			.antMatchers(PUBLIC_MATCHERS)
-			.permitAll().anyRequest().authenticated();
+			.permitAll();
 		
 		http
-			.csrf().disable().cors().disable()
-			.formLogin().failureUrl("/login?error").permitAll()
-			.and()
-            .logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
-            .logoutSuccessUrl("/?logout").deleteCookies("remember-me").permitAll()
-            .and()
-            .rememberMe();
+			.csrf().disable()
+		      .formLogin().disable()
+		      .httpBasic().disable()
+		      .logout().disable();
 		
 	}
 	
