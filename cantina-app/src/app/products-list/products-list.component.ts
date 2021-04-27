@@ -6,6 +6,12 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./products-list.component.css']
 })
 export class ProductsListComponent implements OnInit {
+  img="/assets/img/";
+
+  //categoryes = soup, garnish, meat, extra, drinks
+  categories=["SOUP", "PASTA", "MEAT","FISH","DESSERT","DRINKS"];
+
+
 
   constructor() { }
 

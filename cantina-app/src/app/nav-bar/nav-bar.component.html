@@ -26,7 +26,7 @@
             <a class="nav-link" routerLink="/acasa">Acasă <span class="sr-only">(current)</span></a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Menu</a>
+            <a class="nav-link" routerLink="/menu" href="#">Menu</a>
           </li>
           <li *ngIf="!isAdmin"  class="nav-item">
             <a class="nav-link" href="#">Coșul meu</a>
@@ -42,7 +42,7 @@
             <a class="nav-link" routerLink="/admin" href="#">Adminstration</a>
           </li>
           <li *ngIf="!isAdmin && isLogIn" class="nav-item">
-            <a class="nav-link" routerLink="/admin" href="#">Profile</a>
+            <a class="nav-link" routerLink="/profile" href="#">Profile</a>
           </li>
         </ul>
       </div>

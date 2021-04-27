@@ -10,6 +10,7 @@ import {AdminComponent} from "./admin/admin.component";
 import {AddProductComponent} from "./add-product/add-product.component";
 import {EditProductComponent} from "./edit-product/edit-product.component";
 import {LoginAuthGuard} from "./login-auth.guard";
+import {ProductsListComponent} from "./products-list/products-list.component";
 
 
 const routes: Routes = [
@@ -19,6 +20,7 @@ const routes: Routes = [
   {path: 'login', component: LoginComponent},
   {path: 'register', component: RegisterFormComponent},
   {path: 'forget-password', component: ForgetPasswordComponent},
+  {path: 'menu', component: ProductsListComponent},
   // { path: '**', component: PageNotFoundComponent},
   {
     path: 'admin',

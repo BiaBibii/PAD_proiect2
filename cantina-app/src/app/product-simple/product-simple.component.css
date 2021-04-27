@@ -1,0 +1,83 @@
+.menu-holder  , .menu-item{
+  float:left;
+  width:100%;
+  position:relative;
+}
+.menu-item {
+  padding:24px 20px;
+}
+.menu-item-details {
+  display:table
+}
+.menu-item-desc {
+  padding-right: 5px; font-family: 'Droid Serif', serif;
+  font-weight:bold;
+  font-style:italic;
+  text-align:left;
+  font-size:20px;
+  display: table-cell;
+  white-space: nowrap;
+  width: 10%;
+  line-height:15px;
+  text-align:left;
+}
+.menu-item-dot {
+  display: table-cell;
+  width: 88%;
+  border-bottom: 1px dotted #000;
+}
+.menu-item-price {
+  text-align:left;
+  font-size:24px;
+}
+.menu-item-prices {
+  display: table-cell;
+  white-space: nowrap;
+  width: 2%;
+  padding:10px 0 0 10px;
+  text-align:left;
+}
+.hot-deal:before {
+  content:'';
+  position:absolute;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+}
+.hot-desc {
+  position:absolute;
+  top:0;
+  left:0;
+  padding:0 20px;
+  color:#fff;
+  height:30px;
+  line-height:30px;
+  font-size:14px;
+  font-family: 'Playball', cursive;
+  letter-spacing:2px;
+}
+.menu-bg {
+  position:absolute;
+  bottom:0;
+  width:650px;
+  height:400px;
+  background-size: contain;
+  background-repeat:no-repeat;
+  background-position:bottom;
+  opacity:0.2;
+}
+.lbd {
+  left:0;
+}
+.rbd {
+  right:0;
+}
+
+.container {
+  max-width: 1224px;
+  width: 92%;
+  margin: 0 auto;
+  position: relative;
+  z-index: 2;
+}
