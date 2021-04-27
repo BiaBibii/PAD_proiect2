@@ -1,0 +1,649 @@
+
+body,
+html {
+  margin: 0;
+  padding: 0;
+}
+body {
+  background: #ffffff;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 16px;
+  line-height: 26px;
+  font-weight: 400;
+  color: #555353;
+  overflow-x: hidden;
+}
+
+.align_left {
+  text-align: left;
+}
+.align_center {
+  text-align: center;
+}
+.align_right {
+  text-align: right;
+}
+.clear {
+  clear: both;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 40px;
+}
+
+table td, table th {
+  text-align: center;
+  padding: 7px 0;
+  border: 1px solid #e1e1e1;
+}
+body table th {
+  vertical-align: middle;
+}
+
+dt {
+  font-weight: bold;
+  text-decoration: underline;
+}
+
+dd {
+  margin: 0;
+  padding: 0 0 0.5em 0;
+}
+
+pre {
+  display: block;
+  white-space: pre-wrap;
+  margin: 0;
+  word-break: break-all;
+  word-wrap: break-word;
+  max-width: 100%;
+}
+
+iframe {
+  display: block;
+  max-width: 100%;
+  max-height: 100%;
+}
+
+.restbeef_container_wide {
+  padding: 0 50px;
+  box-sizing: border-box;
+}
+.restbeef_container,
+.restbeef_fullwidth_boxed .restbeef_block_inner {
+  width: 1170px;
+  margin: 0 auto;
+}
+.restbeef_spacer {
+  display: block;
+  min-height: 400px;
+}
+.restbeef_col_inner {
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* Restbeef Gap Addon for KUBE.CSS */
+.row {
+  margin-left: -15px;
+  margin-right: -15px;
+}
+.row.row_reverse {
+  flex-direction: row-reverse;
+}
+.row > div {
+  padding-left: 15px;
+  padding-right: 15px;
+  box-sizing: border-box;
+}
+.row.row_no_gap {
+  margin-left: 0;
+  margin-right: 0;
+}
+.row.row_no_gap > div {
+  padding-left: 0;
+  padding-right: 0;
+}
+.restbeef_content_wrapper.row {
+  margin-left: -30px;
+  margin-right: -30px;
+}
+.restbeef_content_wrapper.row > div {
+  padding-left: 30px;
+  padding-right: 30px;
+}
+.restbeef_content_wrapper {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.restbeef_content_wrapper .restbeef_sidebar {
+  width: 270px;
+}
+.restbeef_content_wrapper.restbeef_no_sidebar .restbeef_content {
+  width: 100%;
+}
+.restbeef_content_wrapper.restbeef_left_sidebar .restbeef_content,
+.restbeef_content_wrapper.restbeef_right_sidebar .restbeef_content {
+  width: 840px;
+}
+.restbeef_content_wrapper.restbeef_left_sidebar {
+  flex-direction: row-reverse;
+}
+.restbeef_header_wrapper.restbeef_height100,
+.restbeef_height100 {
+  min-height: 100vh;
+  box-sizing: border-box;
+}
+.restbeef_align_middle {
+  align-items: center;
+  display: inline-flex;
+}
+.restbeef_align_bottom {
+  align-items: flex-end;
+  display: inline-flex;
+}
+
+.restbeef_site_wrapper {
+  transition: opacity 500ms;
+}
+.fadeOnLoad {
+  opacity: 0;
+}
+
+/* FORMS AND INPUTS */
+form {
+  margin: 0;
+}
+
+a.restbeef_button,
+input[type="button"],
+input[type="reset"],
+input[type="submit"],
+input[type="radio"],
+input[type="checkbox"] {
+  cursor: pointer;
+  outline: none;
+}
+
+body input[type="text"],
+body input[type="number"],
+body input[type="password"],
+body input[type="email"],
+body input[type="tel"],
+body input[type="date"],
+body input[type="time"],
+body input[type="datetime"],
+body input[type="url"],
+body select,
+body textarea {
+  vertical-align: top;
+  background: transparent;
+  border: none;
+  border-radius: 0;
+  width: 100%;
+  height: 40px;
+  color: #555353;
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 700;
+  font-family: 'Roboto Condensed', sans-serif;
+  margin-bottom: 30px;
+  padding: 10px 13px 10px 13px;
+  border: 2px solid #909090;
+  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+}
+body .restbeef_footer_widgets input {
+  color: #ffffff;
+  border-color: #ffffff;
+  padding: 10px 16px 10px 16px;
+}
+body textarea:active,
+body textarea:focus {
+  background: transparent;
+  border: 2px solid #909090;
+}
+
+body textarea {
+  height: 180px;
+  resize: none;
+  padding: 9px 13px 11px 13px;
+}
+
+body select,
+body select:focus {
+  position: relative;
+  border-radius: 0;
+  outline: none!important;
+  background: transparent;
+}
+select:before {
+  content: '';
+  position: absolute;
+  display: block;
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 5px 5px 0 5px;
+  right: 10px;
+  top: 10px;
+}
+
+a.restbeef_button,
+input[type="button"],
+input[type="reset"],
+input[type="submit"] {
+  display: inline-block;
+  vertical-align: middle;
+  text-align: center;
+  padding: 15px 30px 15px 30px;
+  color: #ffffff;
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 700;
+  font-family: 'Roboto Condensed', sans-serif;
+  background: #C59D5F;
+  height: 50px;
+  border: none;
+  text-transform: uppercase;
+  border-radius: 0;
+  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  transition: background 300ms, color 300ms, border 300ms;
+}
+a.restbeef_button:visited,
+a.restbeef_button:focus {
+  color: #ffffff;
+}
+a.restbeef_button.restbeef_button_small {
+  height: 43px;
+  padding: 12px 30px 11px 30px;
+}
+a.restbeef_button.restbeef_button_white:visited,
+a.restbeef_button.restbeef_button_white:focus,
+a.restbeef_button.restbeef_button_white {
+  background: #ffffff;
+  color: #C59D5F;
+}
+
+a.restbeef_button:hover,
+input[type="button"]:hover,
+input[type="reset"]:hover,
+input[type="submit"]:hover {
+  background: #212121;
+  color: #ffffff;
+}
+
+a.restbeef_button.restbeef_button_reverse:visited,
+a.restbeef_button.restbeef_button_reverse:focus,
+a.restbeef_button.restbeef_button_reverse,
+input[type="button"].restbeef_button_reverse,
+input[type="reset"].restbeef_button_reverse,
+input[type="submit"].restbeef_button_reverse {
+  background: #212121;
+  color: #ffffff;
+}
+a.restbeef_button.restbeef_button_white.restbeef_button_reverse:visited,
+a.restbeef_button.restbeef_button_white.restbeef_button_reverse:focus,
+a.restbeef_button.restbeef_button_white.restbeef_button_reverse,
+input[type="button"].restbeef_button_white.restbeef_button_reverse,
+input[type="reset"].restbeef_button_white.restbeef_button_reverse,
+input[type="submit"].restbeef_button_white.restbeef_button_reverse {
+  background: #C59D5F;
+  color: #ffffff;
+}
+a.restbeef_button.restbeef_button_white:hover,
+a.restbeef_button.restbeef_button_reverse:hover,
+input[type="button"].restbeef_button_reverse:hover,
+input[type="reset"].restbeef_button_reverse:hover,
+input[type="submit"].restbeef_button_reverse:hover {
+  background: #C59D5F;
+  color: #ffffff;
+}
+a.restbeef_button.restbeef_button_white.restbeef_button_reverse:hover,
+input[type="button"].restbeef_button_white.restbeef_button_reverse:hover,
+input[type="reset"].restbeef_button_white.restbeef_button_reverse:hover,
+input[type="submit"].restbeef_button_white.restbeef_button_reverse:hover {
+  background: #ffffff;
+  color: #b71c1c;
+}
+
+form input[type="button"],
+form input[type="reset"],
+form input[type="submit"] {
+  width: 100%;
+}
+
+body .restbeef_footer_widgets a.restbeef_button,
+body .restbeef_footer_widgets input[type="button"],
+body .restbeef_footer_widgets input[type="reset"],
+body .restbeef_footer_widgets input[type="submit"]{
+  border: 2px solid #ffffff;
+  background: rgba(33,33,33,0);
+  padding: 6px 15px 4px 15px;
+}
+body .restbeef_footer_widgets a.restbeef_button:hover,
+body .restbeef_footer_widgets input[type="button"]:hover,
+body .restbeef_footer_widgets input[type="reset"]:hover,
+body .restbeef_footer_widgets input[type="submit"]:hover {
+  background: rgba(33,33,33,1);
+}
+
+body button.pswp__button,
+body button.pswp__button:hover {
+  background-color: transparent;
+}
+
+.restbeef_pswp_video_wrapper {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%,-50%);
+}
+.restbeef_pswp_video_wrapper iframe {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+input,
+textarea,
+button {
+  -webkit-appearance: none;
+  outline: none;
+}
+input[type="radio"] {
+  -webkit-appearance: radio;
+}
+input[type="checkbox"] {
+  -webkit-appearance: checkbox;
+}
+
+input:focus,
+input:active,
+textarea:focus,
+body {
+  outline: none !important;
+  outline-offset: 0 !important;
+  box-shadow: none;
+}
+
+input::-moz-placeholder {
+  opacity: 1;
+  text-transform: uppercase;
+  color: #555353;
+}
+
+textarea::-moz-placeholder {
+  opacity: 1;
+  text-transform: uppercase;
+  letter-spacing: 0.1px;
+  color: #555353;
+}
+
+input::-webkit-input-placeholder {
+  opacity: 1;
+  text-transform: uppercase;
+  color: #555353;
+}
+
+textarea::-webkit-input-placeholder {
+  opacity: 1;
+  text-transform: uppercase;
+  color: #555353;
+}
+
+input::-ms-input-placeholder {
+  opacity: 1;
+  text-transform: uppercase;
+  color: #555353;
+}
+
+textarea::-ms-input-placeholder {
+  opacity: 1;
+  text-transform: uppercase;
+  color: #555353;
+}
+
+body .restbeef_footer_widgets input::-moz-placeholder {
+  color: #ffffff;
+}
+
+body .restbeef_footer_widgets textarea::-moz-placeholder {
+  color: #ffffff;
+}
+
+body .restbeef_footer_widgets input::-webkit-input-placeholder {
+  color: #ffffff;
+}
+
+body .restbeef_footer_widgets textarea::-webkit-input-placeholder {
+  color: #ffffff;
+}
+
+body .restbeef_footer_widgets input::-ms-input-placeholder {
+  color: #ffffff;
+}
+
+body .restbeef_footer_widgets textarea::-ms-input-placeholder {
+  color: #ffffff;
+}
+
+
+
+
+
+
+/* TYPOGRAPHY */
+/* General Typography */
+a,
+a:hover {
+  text-decoration: none;
+  color: #b71c1c;
+}
+a {
+  transition: color 300ms;
+}
+a:hover {
+  color: #212121;
+}
+
+p {
+  margin: 0 0 26px 0;
+}
+* > p:last-child {
+  margin: 0 0 0 0;
+}
+
+/* Headings */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  text-transform: uppercase;
+  font-family: 'Roboto Condensed', sans-serif;
+  font-weight: 700;
+}
+
+h1 span.restbeef_up_title,
+h2 span.restbeef_up_title,
+h3 span.restbeef_up_title,
+h4 span.restbeef_up_title,
+h5 span.restbeef_up_title,
+h6 span.restbeef_up_title {
+  text-transform: none;
+  display: block;
+  font-family: 'Playball';
+  font-weight: 400;
+  margin: 0 auto 0 auto;
+  color: #C59D5F;
+}
+
+h1,
+h1 a {
+  font-size: 80px;
+  line-height: 85px;
+}
+h1 span {
+  font-size: 60px;
+  line-height: 60px;
+}
+h1 {
+  margin: 0 0 30px 0;
+}
+h1 span.restbeef_up_title {
+  margin: 0 0 7px 0;
+}
+
+h2,
+h2 a,
+h2 span {
+  font-size: 50px;
+  line-height: 55px;
+}
+h2 {
+  margin: 0 0 30px 0;
+}
+h2 span.restbeef_up_title {
+  margin: 0 0 0 0;
+}
+
+h3,
+h3 a,
+h3 span {
+  font-size: 40px;
+  line-height: 45px;
+}
+h3 {
+  margin: 0 0 30px 0;
+}
+h3 span.restbeef_up_title {
+  margin: 0 0 0 0;
+}
+
+h4,
+h4 a,
+h4 span {
+  font-size: 30px;
+  line-height: 35px;
+}
+h4 {
+  margin: 0 0 24px 0;
+}
+h4 span.restbeef_up_title {
+  margin: 0 0 -2px 0;
+}
+
+h5,
+h5 a,
+h5 span {
+  font-size: 24px;
+  line-height: 29px;
+}
+h5 {
+  margin: 0 0 20px 0;
+}
+h5 span.restbeef_up_title {
+  margin: 0 0 -6px 0;
+}
+
+h6,
+h6 a,
+h6 span {
+  font-size: 20px;
+  line-height: 25px;
+}
+h6 {
+  margin: 0 0 20px 0;
+}
+h6 span.restbeef_up_title {
+  margin: 0 0 -3px 0;
+}
+
+h1 a,
+h2 a,
+h3 a,
+h4 a,
+h5 a,
+h6 a {
+  color: #212121;
+}
+
+h1 a:hover,
+h2 a:hover,
+h3 a:hover,
+h4 a:hover,
+h5 a:hover,
+h6 a:hover {
+  color: #b71c1c;
+}
+
+
+
+
+
+
+/* PRODUCT PAGE */
+/* Summary Block */
+.restbeef_poduct_summary .row {
+  align-items: center;
+}
+.restbeef_poduct_summary img {
+  width: 100%;
+  height: auto;
+}
+.restbeef_poduct_summary_content {
+  background: #ffffff;
+  box-shadow: 0 17px 67px rgba(52,63,75,0.2);
+  margin: 0 0 0 -100px;
+  padding: 45px 50px 50px 50px;
+}
+.restbeef_poduct_summary_content h2 {
+  margin-bottom: 31px;
+}
+.restbeef_poduct_summary_content .restbeef_poduct_description {
+  margin-bottom: 43px;
+}
+.restbeef_poduct_summary_content .restbeef_poduct_description h6 {
+  margin: 0 0 1px 0;
+}
+.restbeef_poduct_summary_content .restbeef_poduct_description span {
+  display: inline-block;
+  margin: 0 10px;
+}
+.restbeef_product_order input {
+  display: inline-block;
+}
+.restbeef_product_order {
+  margin: -3px 0 0 0;
+}
+.restbeef_product_order input[type="number"] {
+  width: 50px;
+  height: 50px;
+  text-align: right;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 0 6px 0 0;
+}
+.restbeef_product_order input[type="submit"] {
+  display: inline-block;
+  vertical-align: top;
+  max-width: 150px;
+}
+
+
+
+
