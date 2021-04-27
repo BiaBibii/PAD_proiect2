@@ -27,12 +27,12 @@ export class UserService {
 
 
   register(user: User) {
-    return this.http.post<User>(this.url + 'register', user);
+    return this.http.post<User>(this.url + 'signup', user);
   }
 
 
   logIn(user: User) {
-    return this.http.post<User>(this.url + 'login', user);
+    return this.http.post<User>(this.url + 'signin', user);
   }
 
 
