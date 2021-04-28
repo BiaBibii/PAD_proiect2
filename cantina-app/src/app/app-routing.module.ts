@@ -11,6 +11,7 @@ import {AddProductComponent} from "./add-product/add-product.component";
 import {EditProductComponent} from "./edit-product/edit-product.component";
 import {LoginAuthGuard} from "./login-auth.guard";
 import {ProductsListComponent} from "./products-list/products-list.component";
+import {CartComponent} from "./cart/cart.component";
 
 
 const routes: Routes = [
@@ -21,6 +22,7 @@ const routes: Routes = [
   {path: 'register', component: RegisterFormComponent},
   {path: 'forget-password', component: ForgetPasswordComponent},
   {path: 'menu', component: ProductsListComponent},
+  {path: 'my-cart', component: CartComponent},
   // { path: '**', component: PageNotFoundComponent},
   {
     path: 'admin',

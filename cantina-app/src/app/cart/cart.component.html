@@ -1,0 +1,85 @@
+<app-parallax-image [img]="img">
+  <h1 class="text-center">MY CART</h1>
+  <p id="p1" class="text-center">Shop now, eat later! </p>
+</app-parallax-image>
+<div class="container">
+  <!-- CHECKOUT TABLE -->
+  <div class="row">
+    <div class="col-sm-12">
+      <table class="table table-border checkout-table">
+        <tbody>
+        <tr>
+          <th class="hidden-xs" style="display: none">Item</th>
+          <th>Title</th>
+          <th class="hidden-xs">Price</th>
+          <th>Quantity</th>
+          <th>Total</th>
+          <th></th>
+        </tr>
+
+
+<!--        ng for pentru produseeeeeeee---------------------------------->
+        <tr>
+          <td class="hidden-xs" style="display: none">
+<!--            <a href="#"><img src="images/gallery/1.jpg" alt="" class="respimg"></a>-->
+          </td>
+          <td>
+            <h5 class="product-name">Cake Monro</h5>
+          </td>
+          <td class="hidden-xs">
+            <h5 class="order-money">$56.00</h5>
+          </td>
+          <td class="hidden-xs">
+            <input type="number" name="" value="1" max="50" min="1" class="order-count">
+          </td>
+          <td class="hidden-xs">
+            <h5 class="order-money">$56.00</h5>
+          </td>
+          <td class="pr-remove">
+            <a href="#" title="Remove" style="color: black  !important;"><i class="fa fa-times"></i></a>
+          </td>
+        </tr>
+
+      </table>
+    </div>
+  </div>
+  <!-- /CHECKOUT TABLE -->
+  <!-- COUPON -->
+  <div class="row">
+    <div class="coupon-holder">
+      <div class="col-md-12">
+        <input type="text" name="" placeholder="Coupon code">
+        <button type="submit" class="btn-a">Apply</button>
+<!--        <button type="submit" class="pull-right btn-uc">Update Cart</button>-->
+      </div>
+    </div>
+  </div>
+  <!-- /COUPON -->
+  <!-- CART TOTALS  -->
+  <div class="row">
+
+    <div class="col-sm-5 col-sm-offset-7" >
+      <div class="cart-totals">
+        <h4>Cart Totals</h4>
+        <table class="table table-border checkout-table">
+          <tbody>
+          <tr>
+            <th>Cart Subtotal:</th>
+            <td>$40.00</td>
+          </tr>
+          <tr>
+            <th>Discount</th>
+            <td>- $2.00</td>
+          </tr>
+          <tr>
+            <th>Total:</th>
+            <td>$38.00</td>
+          </tr>
+          </tbody>
+        </table>
+        <button type="submit" class="btn btn-lg btn-block btn-round btn-d">Proceed to Checkout</button>
+      </div>
+    </div>
+  </div>
+  <!-- /CART TOTALS  -->
+</div>
