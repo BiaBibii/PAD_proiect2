@@ -6,6 +6,7 @@ public class UserResetPassword {
 	private String password;
 	private String newPassword;
 	private String confirmNewPassword;
+	
 	public String getEmail() {
 		return email;
 	}
