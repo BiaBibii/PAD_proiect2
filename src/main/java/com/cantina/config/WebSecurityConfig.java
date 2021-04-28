@@ -58,8 +58,13 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 			.exceptionHandling().authenticationEntryPoint(unauthorizedHandler).and()
 			.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
 			.authorizeRequests()
-			.antMatchers("/api/foods/**").hasRole("ADMIN")
+			.antMatchers("/api/foods/foodList").hasRole("ADMIN")
+			.antMatchers("/api/foods/addFoodProduct").hasRole("ADMIN")
+			.antMatchers("/api/foods/updateFoodProduct").hasRole("ADMIN")
+			.antMatchers("/api/foods/deleteFoodProduct").hasRole("ADMIN")
+			.antMatchers("/api/foods/getFoodProduct").hasAnyRole("ADMIN", "USER")
             .antMatchers("/api/cantinaCart/**").hasRole("USER")
+            .antMatchers("/api/updateUserInformation").hasRole("USER")
             .antMatchers(PUBLIC_MATCHERS)
             .permitAll();
 

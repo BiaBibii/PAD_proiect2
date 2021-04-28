@@ -1,5 +1,6 @@
 package com.cantina.controller;
 
+import java.security.Principal;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -26,6 +27,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.cantina.model.CantinaCart;
 import com.cantina.model.User;
+import com.cantina.model.dao.ForgetPasswordDao;
+import com.cantina.model.dao.UserDao;
 import com.cantina.model.security.ERole;
 import com.cantina.model.security.Role;
 import com.cantina.payload.request.LoginRequest;
@@ -38,6 +41,7 @@ import com.cantina.security.jwt.JwtUtils;
 import com.cantina.security.services.UserDetailsImpl;
 import com.cantina.service.UserService;
 import com.cantina.utility.MailConstructor;
+import com.cantina.utility.SecurityUtility;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:4200")
@@ -113,7 +117,7 @@ public class HomeController {
 		Set<String> strRoles = signUpRequest.getRole();
 		Set<Role> roles = new HashSet<>();
 
-		if (strRoles == null) {
+		if (strRoles.isEmpty()) {
 			Role userRole = roleRepository.findByName(ERole.ROLE_USER)
 					.orElseThrow(() -> new RuntimeException("Error: Role is not found."));
 			roles.add(userRole);
@@ -126,7 +130,7 @@ public class HomeController {
 					roles.add(adminRole);
 
 					break;
-				
+
 				default:
 					Role userRole = roleRepository.findByName(ERole.ROLE_USER)
 							.orElseThrow(() -> new RuntimeException("Error: Role is not found."));
@@ -136,83 +140,80 @@ public class HomeController {
 		}
 
 		user.setRoles(roles);
-		
+
 		CantinaCart cantinaCart = new CantinaCart();
-        cantinaCart.setUser(user);
-        user.setCantinaCart(cantinaCart);
-		
+		cantinaCart.setUser(user);
+		user.setCantinaCart(cantinaCart);
+
 		userRepository.save(user);
 
 		return ResponseEntity.ok(new MessageResponse("User registered successfully!"));
 	}
 
-	/*
-	 * @PostMapping("/forgetPassword") public String
-	 * forgetPassword(HttpServletRequest request, @RequestBody String email) throws
-	 * Exception {
-	 * 
-	 * User user = userService.findByEmail(email);
-	 * 
-	 * if (user == null) { throw new Exception("This user doesn't exist!"); }
-	 * 
-	 * String password = SecurityUtility.randomPassword(); String encryptedPassword
-	 * = SecurityUtility.passwordEncoder().encode(password);
-	 * user.setPassword(encryptedPassword);
-	 * 
-	 * userService.saveUser(user);
-	 * 
-	 * String appUrl = "http://" + request.getServerName() + ":" +
-	 * request.getServerPort() + request.getContextPath();
-	 * 
-	 * SimpleMailMessage newEmail = mailConstructor.constructResetPassword(appUrl,
-	 * request.getLocale(), user, password);
-	 * 
-	 * mailSender.send(newEmail);
-	 * 
-	 * return "email send";
-	 * 
-	 * }
-	 */
+	@PostMapping("/forgetPassword")
+	public String forgetPassword(HttpServletRequest request, @RequestBody ForgetPasswordDao dao) throws Exception {
 
-	/*
-	 * @PostMapping("/updateUserInformation") public User passwordReset(@RequestBody
-	 * UserDao user, Principal principal) throws Exception {
-	 * 
-	 * User currentUser = userService.findByUsername(principal.getName());
-	 * 
-	 * if(currentUser == null) { throw new Exception("User not found"); }
-	 * 
-	 * check email already exists if(userService.findByEmail(user.getEmail()) !=
-	 * null) { if(userService.findByEmail(user.getEmail()).getId() !=
-	 * currentUser.getId()) { throw new Exception("Email already exists!"); } }
-	 * 
-	 * check username already exists
-	 * if(userService.findByUsername(user.getUsername()) != null) {
-	 * if(userService.findByUsername(user.getUsername()).getId() !=
-	 * currentUser.getId()) { throw new Exception("Username already exists!"); } }
-	 * 
-	 * update password if(user.getPassword() != null &&
-	 * !user.getPassword().isEmpty() && !user.getPassword().equals("")) {
-	 * BCryptPasswordEncoder passwordEncoder = SecurityUtility.passwordEncoder();
-	 * currentUser.setPassword(passwordEncoder.encode(user.getPassword())); }
-	 * 
-	 * currentUser.setFirstName(user.getFirstName());
-	 * currentUser.setLastName(user.getLastName());
-	 * currentUser.setUsername(user.getUsername());
-	 * currentUser.setEmail(user.getEmail());
-	 * 
-	 * currentUser = userService.saveUser(currentUser);
-	 * 
-	 * UserDetails userDetails =
-	 * userSecurityService.loadUserByUsername(currentUser.getUsername());
-	 * 
-	 * Authentication authentication = new
-	 * UsernamePasswordAuthenticationToken(userDetails, userDetails.getPassword(),
-	 * userDetails.getAuthorities());
-	 * 
-	 * SecurityContextHolder.getContext().setAuthentication(authentication);
-	 * 
-	 * return currentUser; }
-	 */
+		User user = userService.findByEmail(dao.getEmail());
+
+		if (user == null) {
+			throw new Exception("This user doesn't exist!");
+		}
+
+		String password = SecurityUtility.randomPassword();
+		String encryptedPassword = encoder.encode(password);
+		user.setPassword(encryptedPassword);
+
+		userService.saveUser(user);
+
+		String appUrl = "http://" + request.getServerName() + ":" + request.getServerPort() + request.getContextPath();
+
+		SimpleMailMessage newEmail = mailConstructor.constructResetPassword(appUrl, request.getLocale(), user,
+				password);
+
+		mailSender.send(newEmail);
+
+		return "email send";
+
+	}
+
+	@PostMapping("/updateUserInformation")
+	public ResponseEntity<?> passwordReset(@RequestBody UserDao user, Principal principal) throws Exception {
+
+		User currentUser = userService.findByUsername(principal.getName());
+
+		if (currentUser == null) {
+			throw new Exception("User not found");
+		}
+
+		// check email already exists
+		if (userService.findByEmail(user.getEmail()) != null) {
+			if (userService.findByEmail(user.getEmail()).getId() != currentUser.getId()) {
+				throw new Exception("Email already exists!");
+			}
+		}
+
+		// check username already exists
+		if (userService.findByUsername(user.getUsername()) != null) {
+			if (userService.findByUsername(user.getUsername()).getId() != currentUser.getId()) {
+				throw new Exception("Username already exists!");
+			}
+		}
+
+		// update password
+		if (user.getPassword() != null && !user.getPassword().isEmpty() && !user.getPassword().equals("")) {
+			currentUser.setPassword(encoder.encode(user.getPassword()));
+		}
+
+		currentUser.setFirstName(user.getFirstName());
+		currentUser.setLastName(user.getLastName());
+		currentUser.setUsername(user.getUsername());
+		currentUser.setEmail(user.getEmail());
+
+		currentUser = userService.saveUser(currentUser);
+
+		LoginRequest loginRequest = new LoginRequest(currentUser.getUsername(), user.getPassword());
+		
+		return authenticateUser(loginRequest);
+	}
 
 }

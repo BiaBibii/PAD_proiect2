@@ -3,12 +3,9 @@ package com.cantina.controller;
 import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
-import java.security.Principal;
 import java.util.List;
-import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,6 +13,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -73,8 +71,8 @@ public class FoodController {
 		
 	}
 	
-	@GetMapping("/updateFoodProduct/{id}")
-	public FoodProduct updateFoodProduct(@PathVariable(value = "id") Long id) throws Exception {
+	@GetMapping("/getFoodProduct/{id}")
+	public FoodProduct getFoodProduct(@PathVariable(value = "id") Long id) throws Exception {
 		
 		
 		FoodProduct foodProduct = foodProductService.findById(id);
@@ -84,16 +82,32 @@ public class FoodController {
 	
 	//pune hidden id
 	@PostMapping("/updateFoodProduct")
-	public FoodProduct updateFoodProductPost(@RequestBody FoodProduct foodProduct) throws Exception {
+	public FoodProduct updateFoodProductPost(@RequestBody FoodProductDao foodProduct, @RequestParam("id") Long id) throws Exception {
 		
-		FoodProduct updatedFoodProduct = foodProductService.save(foodProduct);
+		FoodProduct updatedFoodProduct = foodProductService.findById(id);
+		
+		if(updatedFoodProduct == null) {
+			throw new Exception("This food product does not exist!");
+		}
+		
+		updatedFoodProduct.setTitle(foodProduct.getTitle());
+		updatedFoodProduct.setCategory(foodProduct.getCategory());
+		updatedFoodProduct.setPrice(foodProduct.getPrice());
+		updatedFoodProduct.setCalories(foodProduct.getCalories());
+		updatedFoodProduct.setProtein(foodProduct.getProtein());
+		updatedFoodProduct.setCarbohydrates(foodProduct.getCarbohydrates());
+		updatedFoodProduct.setFats(foodProduct.getFats());
+		updatedFoodProduct.setServingWeight(foodProduct.getServingWeight());
+		updatedFoodProduct.setDescription(foodProduct.getDescription());
+		
+		updatedFoodProduct = foodProductService.save(updatedFoodProduct);
 		
 		MultipartFile foodImage = foodProduct.getFoodProductImage();
 		
 		if(foodImage != null) {
 			try {
 				byte[] bytes = foodImage.getBytes();
-				String name = foodProduct.getId() + ".png";
+				String name = String.valueOf(id) + ".png";
 				BufferedOutputStream stream = new BufferedOutputStream(new FileOutputStream(new File("src/main/resources/static/images/food/" + name)));
 				stream.write(bytes);
 				stream.close();
@@ -106,8 +120,8 @@ public class FoodController {
 		
 	}
 	
-	@DeleteMapping("/deleteFoodProduct/{id}")
-	public FoodProduct deleteFoodProduct(@PathVariable(value = "id") Long id) throws Exception {
+	@DeleteMapping("/deleteFoodProduct")
+	public FoodProduct deleteFoodProduct(@RequestParam("id") Long id) throws Exception {
 		
 		FoodProduct foodProduct = foodProductService.findById(id);
 		
