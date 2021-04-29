@@ -27,7 +27,7 @@ import { EditProductComponent } from './edit-product/edit-product.component';
 import { ProductSimpleComponent } from './product-simple/product-simple.component';
 import { ProductComponent } from './product/product.component';
 import { CartComponent } from './cart/cart.component';
-
+import { authInterceptorProviders } from './_helpers/auth.interceptor';
 @NgModule({
   declarations: [
     AppComponent,
@@ -60,7 +60,7 @@ import { CartComponent } from './cart/cart.component';
     BrowserAnimationsModule, // required animations module
     ToastrModule.forRoot(), // ToastrModule added
   ],
-  providers: [],
+  providers: [authInterceptorProviders],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

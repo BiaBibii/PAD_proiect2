@@ -9,14 +9,15 @@
         </div>
         <div class="row tm-edit-product-row">
           <div class="col-xl-6 col-lg-6 col-md-12">
-            <form  #productForm="ngForm" (ngSubmit)="productForm.form.valid && add(productForm.value)"action="" class="tm-edit-product-form">
+            <form name="form" #productForm="ngForm" (ngSubmit)="productForm.form.valid && add(productForm.value)"
+                  action="" class="tm-edit-product-form">
               <div class="form-group mb-3">
                 <label for="name">Product Name
                 </label>
-                <input id="name" name="title"  [(ngModel)]="title" type="text" class="form-control validate" required>
+                <input id="name" name="title" [(ngModel)]="title" type="text" class="form-control validate" required>
               </div>
               <div class="form-group mb-3">
-                <label >Description</label>
+                <label>Description</label>
                 <textarea class="form-control validate" rows="3" required=""></textarea>
               </div>
               <div class="form-group mb-3">
@@ -32,7 +33,8 @@
                 <div class="form-group mb-3 col-xs-12 col-sm-6">
                   <label for="carbohydrates">Carbohydrates
                   </label>
-                  <input id="carbohydrates" name="carbohydrates" type="number" class="form-control validate" data-large-mode="true">
+                  <input id="carbohydrates" name="carbohydrates" type="number" class="form-control validate"
+                         data-large-mode="true">
                 </div>
                 <div class="form-group mb-3 col-xs-12 col-sm-6">
                   <label for="fats">Fats
@@ -42,18 +44,21 @@
                 <div class="form-group mb-3 col-xs-12 col-sm-6">
                   <label for="calories">Calories
                   </label>
-                  <input id="calories" name="calories" type="number" class="form-control validate hasDatepicker" data-large-mode="true">
+                  <input id="calories" name="calories" type="number" class="form-control validate hasDatepicker"
+                         data-large-mode="true">
                 </div>
                 <div class="form-group mb-3 col-xs-12 col-sm-6">
                   <label for="protein">Protein
                   </label>
-                  <input id="protein" name="protein" type="number" class="form-control validate hasDatepicker" data-large-mode="true">
+                  <input id="protein" name="protein" type="number" class="form-control validate hasDatepicker"
+                         data-large-mode="true">
                 </div>
 
                 <div class="form-group mb-3 col-xs-12 col-sm-6">
                   <label for="servingWeight">Serving Weight
                   </label>
-                  <input id="servingWeight" name="servingWeight" type="number" class="form-control validate" required="">
+                  <input id="servingWeight" name="servingWeight" type="number" class="form-control validate"
+                         required="">
                 </div>
                 <div class="form-group mb-3 col-xs-12 col-sm-6">
                   <label for="price">Price/portion
@@ -62,20 +67,23 @@
                 </div>
               </div>
 
-            </form></div>
-          <div class="col-xl-6 col-lg-6 col-md-12 mx-auto mb-4">
-            <div class="tm-product-img-dummy mx-auto">
-              <i class="fas fa-cloud-upload-alt tm-upload-icon" ></i>
-            </div>
-            <div class="custom-file mt-3 mb-3">
-              <input id="fileInput" type="file" >
-              <input type="button" class="btn btn-primary btn-block mx-auto" value="UPLOAD PRODUCT IMAGE" >
-            </div>
-          </div>
-          <div class="col-12">
-            <button type="submit" class="btn btn-primary btn-block text-uppercase">Add Product Now</button>
-          </div>
+              <div class="col-xl-6 col-lg-6 col-md-12 mx-auto mb-4">
+                <div class="tm-product-img-dummy mx-auto">
+                  <i class="fas fa-cloud-upload-alt tm-upload-icon"></i>
+                </div>
+                <div class="custom-file mt-3 mb-3">
+                  <input id="fileInput" type="file">
+                  <input type="button" class="btn btn-primary btn-block mx-auto" value="UPLOAD PRODUCT IMAGE">
+                </div>
+              </div>
+              <div class="col-12">
+                <button type="submit" class="btn btn-primary btn-block text-uppercase" (click)="addProduct()">Add
+                  Product Now
+                </button>
+              </div>
 
+            </form>
+          </div>
         </div>
       </div>
     </div>
