@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {FoodService} from "../services/food.service";
 
 @Component({
   selector: 'app-products-list',
@@ -6,16 +7,27 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./products-list.component.css']
 })
 export class ProductsListComponent implements OnInit {
-  img="/assets/img/";
+  img = "/assets/img/";
 
   //categoryes = soup, garnish, meat, extra, drinks
-  categories=["SOUP", "PASTA", "MEAT","FISH","DESSERT","DRINKS"];
+  categories = ["SOUP", "PASTA", "MEAT", "FISH", "DESSERT", "DRINKS"];
+  foodList: any = [];
 
 
-
-  constructor() { }
-
-  ngOnInit(): void {
+  constructor(private foodService: FoodService) {
   }
 
+  ngOnInit(): void {
+    this.foodService.getFoodList().subscribe((data) => {
+      this.foodList=data;
+      console.log(this.foodList);
+      },
+      error => {
+      console.log(error);
+      })
+  }
+
+
+
 }
+

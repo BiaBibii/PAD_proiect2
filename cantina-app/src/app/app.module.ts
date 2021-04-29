@@ -28,6 +28,7 @@ import { ProductSimpleComponent } from './product-simple/product-simple.componen
 import { ProductComponent } from './product/product.component';
 import { CartComponent } from './cart/cart.component';
 import { authInterceptorProviders } from './_helpers/auth.interceptor';
+import { FilterPipe } from './filter.pipe';
 @NgModule({
   declarations: [
     AppComponent,
@@ -49,6 +50,7 @@ import { authInterceptorProviders } from './_helpers/auth.interceptor';
     ProductSimpleComponent,
     ProductComponent,
     CartComponent,
+    FilterPipe,
 
   ],
   imports: [

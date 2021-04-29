@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
+import {Product} from "../models/product";
 
 @Component({
   selector: 'app-product-simple',
@@ -6,6 +7,9 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./product-simple.component.css']
 })
 export class ProductSimpleComponent implements OnInit {
+
+  @Input()
+  item: Product| any;
 
   constructor() { }
 
