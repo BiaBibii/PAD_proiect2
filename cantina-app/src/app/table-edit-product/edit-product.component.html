@@ -1,0 +1,42 @@
+<div class="container mt-5">
+  <div class="row tm-content-row">
+    <div class="col-xl-12 col-md-12 col-lg-8 col-xl-8 tm-block-col">
+      <div class="tm-bg-primary-dark tm-block tm-block-products">
+        <div class="tm-product-table-container">
+          <table class="table table-hover tm-table-small tm-product-table">
+            <thead>
+            <tr>
+              <th scope="col"></th>
+              <th scope="col">NAME</th>
+              <th scope="col">WEIGHT</th>
+              <th scope="col">FATS</th>
+              <th scope="col">PROTEIN</th>
+              <th scope="col">CALORIES</th>
+              <th scope="col">CARBS</th>
+              <th scope="col">PRICE</th>
+              <th scope="col"></th>
+              <th scope="col"></th>
+            </tr>
+            </thead>
+            <tbody>
+
+
+              <tr *ngFor="let item of foodList" app-product-edit [item]="item" ></tr>
+
+
+            </tbody>
+          </table>
+        </div>
+        <!-- table container -->
+        <a href="#" [routerLink]="['admin/add-product']" class="btn btn-primary btn-block text-uppercase mb-3"
+           (click)="addNewProduct()">Add new product</a>
+
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
+
+

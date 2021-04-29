@@ -54,7 +54,7 @@ public class FoodController {
 		newFoodProduct = foodProductService.save(newFoodProduct);
 		
 		MultipartFile foodImage = foodProduct.getFoodProductImage();
-		
+
 		if(foodImage != null) {
 			try {
 				byte[] bytes = foodImage.getBytes();
@@ -70,8 +70,10 @@ public class FoodController {
 		return newFoodProduct;
 		
 	}
-	
-	@GetMapping("/getFoodProduct/{id}")
+
+
+
+		@GetMapping("/getFoodProduct/{id}")
 	public FoodProduct getFoodProduct(@PathVariable(value = "id") Long id) throws Exception {
 		
 		
@@ -120,8 +122,8 @@ public class FoodController {
 		
 	}
 	
-	@DeleteMapping("/deleteFoodProduct")
-	public FoodProduct deleteFoodProduct(@RequestParam("id") Long id) throws Exception {
+	@DeleteMapping("/deleteFoodProduct/{id}")
+	public FoodProduct deleteFoodProduct(@PathVariable("id") Long id) throws Exception {
 		
 		FoodProduct foodProduct = foodProductService.findById(id);
 		

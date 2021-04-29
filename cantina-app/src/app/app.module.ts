@@ -21,14 +21,15 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { AddProductComponent } from './add-product/add-product.component';
-import { ProductsListComponent } from './products-list/products-list.component';
+import { ProductsListComponent } from './menu/products-list.component';
 import { AdminComponent } from './admin/admin.component';
-import { EditProductComponent } from './edit-product/edit-product.component';
+import { EditProductComponent } from './table-edit-product/edit-product.component';
 import { ProductSimpleComponent } from './product-simple/product-simple.component';
 import { ProductComponent } from './product/product.component';
 import { CartComponent } from './cart/cart.component';
 import { authInterceptorProviders } from './_helpers/auth.interceptor';
 import { FilterPipe } from './filter.pipe';
+import { ProductEditComponent } from './product-edit/product-edit.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -51,6 +52,7 @@ import { FilterPipe } from './filter.pipe';
     ProductComponent,
     CartComponent,
     FilterPipe,
+    ProductEditComponent,
 
   ],
   imports: [

@@ -22,4 +22,8 @@ export class FoodService {
     return this.http.get(this.url + 'getFoodProduct/' + id);
   }
 
+  deleteFoodProduct(id: string){
+    console.log(id);
+    return this.http.delete(this.url + 'deleteFoodProduct/'+id);
+  }
 }

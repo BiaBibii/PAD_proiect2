@@ -1,0 +1,23 @@
+
+  <th scope="row"><input [checked]="item.active==1" type="checkbox"></th>
+  <td class="tm-product-name"><input value="{{item.title}}"></td>
+
+  <td><input type="number" style="width: 80px" value="{{item.servingWeight}}"></td>
+  <td><input type="number" style="width: 80px" value="{{item.fats}}"></td>
+  <td><input type="number" style="width: 80px" value="{{item.protein}}"></td>
+  <td><input type="number" style="width: 80px" value="{{item.calories}}"></td>
+  <td><input type="number" style="width: 80px" value="{{item.carbohydrates}}"></td>
+  <td><input type="number" style="width: 80px" value="{{item.price}}"></td>
+
+  <td>
+    <button (click)="updateItem()">
+      <i class="fas fa-refresh"></i>
+    </button>
+  </td>
+
+  <td>
+    <button (click)="deleteItem()">
+      <i class="fas fa-trash"></i>
+    </button>
+  </td>
+
