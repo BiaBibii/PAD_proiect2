@@ -2,7 +2,7 @@
 
 <div class="menu-item">
   <div class="menu-item-details">
-    <div class="menu-item-desc"><a >{{item.title}}</a></div>
+    <div class="menu-item-desc"><a [routerLink]="['/product', item.id]">{{item.title}}</a></div>
     <div class="menu-item-dot"></div>
     <div class="menu-item-prices">
       <div class="menu-item-price">${{item.price}}</div>

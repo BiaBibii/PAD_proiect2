@@ -10,12 +10,16 @@ export class FoodService {
   constructor(private http: HttpClient) {
   }
 
-  addFoodProduct(product:any) {
-    return this.http.post(this.url + 'addFoodProduct',product);
+  addFoodProduct(product: any) {
+    return this.http.post(this.url + 'addFoodProduct', product);
   }
 
   getFoodList() {
     return this.http.get(this.url + 'foodList');
+  }
+
+  getFoodProductById(id: any) {
+    return this.http.get(this.url + 'getFoodProduct/' + id);
   }
 
 }
