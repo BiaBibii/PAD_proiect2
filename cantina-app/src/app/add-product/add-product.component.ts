@@ -9,21 +9,36 @@ import {FoodService} from "../services/food.service";
 })
 export class AddProductComponent implements OnInit {
 
-  product: Product|undefined;
+  product: Product | undefined;
   title: any;
+  form: any = {};
+  selectedFile: File| any;
 
-  constructor(private foodSerivce: FoodService) {
+  constructor(private foodService: FoodService) {
 
   }
 
   ngOnInit(): void {
   }
 
-  add(value: any) {
-
+  onFileChanged($event: Event) {
+    // @ts-ignore
+    this.selectedFile = event.target.files[0];
   }
 
+
+
   addProduct() {
+    const uploadData = new FormData();
+    uploadData.append('foodProductImage', this.selectedFile);
+    this.form.foodProductImage=null;
+    console.log(this.form.foodProductImage);
+    this.foodService.addFoodProduct(this.form).subscribe((data) => {
+        console.log(data);
+      },
+      error => {
+        console.log(error);
+      });
   }
 
   // getProduct(){
@@ -35,4 +50,6 @@ export class AddProductComponent implements OnInit {
   //       console.log(error);
   //     });
   // }
+
+
 }
