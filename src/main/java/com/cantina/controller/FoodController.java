@@ -83,8 +83,8 @@ public class FoodController {
 	}
 	
 	//pune hidden id
-	@PostMapping("/updateFoodProduct")
-	public FoodProduct updateFoodProductPost(@RequestBody FoodProductDao foodProduct, @RequestParam("id") Long id) throws Exception {
+	@PostMapping("/updateFoodProduct/{id}")
+	public FoodProduct updateFoodProductPost(@RequestBody FoodProductDao foodProduct, @PathVariable("id") Long id) throws Exception {
 		
 		FoodProduct updatedFoodProduct = foodProductService.findById(id);
 		

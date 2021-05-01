@@ -23,7 +23,10 @@ export class FoodService {
   }
 
   deleteFoodProduct(id: string){
-    console.log(id);
     return this.http.delete(this.url + 'deleteFoodProduct/'+id);
+  }
+
+  updateFoodProduct(upitem: any, id: string){
+    return this.http.post(this.url + 'updateFoodProduct/'+id,upitem);
   }
 }

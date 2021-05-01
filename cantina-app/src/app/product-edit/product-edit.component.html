@@ -1,13 +1,13 @@
 
-  <th scope="row"><input [checked]="item.active==1" type="checkbox"></th>
-  <td class="tm-product-name"><input value="{{item.title}}"></td>
+  <th scope="row"><input [checked]="item.active==1" id="active"  type="checkbox"></th>
+  <td class="tm-product-name"  ><input  id="title" value="{{item.title}}"></td>
 
-  <td><input type="number" style="width: 80px" value="{{item.servingWeight}}"></td>
-  <td><input type="number" style="width: 80px" value="{{item.fats}}"></td>
-  <td><input type="number" style="width: 80px" value="{{item.protein}}"></td>
-  <td><input type="number" style="width: 80px" value="{{item.calories}}"></td>
-  <td><input type="number" style="width: 80px" value="{{item.carbohydrates}}"></td>
-  <td><input type="number" style="width: 80px" value="{{item.price}}"></td>
+  <td><input  type="number" style="width: 80px" id="servingWeight"  value="{{item.servingWeight}}"></td>
+  <td><input type="number" style="width: 80px" id="fats"  value="{{item.fats}}"></td>
+  <td><input type="number" style="width: 80px" id="protein"  value="{{item.protein}}"></td>
+  <td><input type="number" style="width: 80px" id="calories" value="{{item.calories}}"></td>
+  <td><input type="number" style="width: 80px" id="carbohydrates"  value="{{item.carbohydrates}}"></td>
+  <td><input type="number" style="width: 80px" id="price"  value="{{item.price}}"></td>
 
   <td>
     <button (click)="updateItem()">
