@@ -25,7 +25,7 @@
           <li class="nav-item active">
             <a class="nav-link" routerLink="/acasa">Acasă <span class="sr-only">(current)</span></a>
           </li>
-          <li class="nav-item">
+          <li  *ngIf="!isAdmin"  class="nav-item">
             <a class="nav-link" routerLink="/menu" href="#">Menu</a>
           </li>
           <li *ngIf="!isAdmin"  class="nav-item">

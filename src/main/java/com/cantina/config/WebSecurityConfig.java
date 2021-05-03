@@ -58,7 +58,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 			.exceptionHandling().authenticationEntryPoint(unauthorizedHandler).and()
 			.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
 			.authorizeRequests()
-			.antMatchers("/api/foods/foodList").hasRole("ADMIN")
 			.antMatchers("/api/foods/addFoodProduct").hasRole("ADMIN")
 			.antMatchers("/api/foods/updateFoodProduct").hasRole("ADMIN")
 			.antMatchers("/api/foods/deleteFoodProduct").hasRole("ADMIN")
@@ -77,7 +76,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
             "/images/**",
             "/api/signup",
             "/api/signin",
-            "/api/forgetPassword"
-           
+            "/api/forgetPassword",
+			"/api/foods/foodList"
     };
 }

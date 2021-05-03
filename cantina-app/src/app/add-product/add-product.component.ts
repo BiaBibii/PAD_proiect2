@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {Product} from "../models/product";
+import {FoodService} from "../services/food.service";
 
 @Component({
   selector: 'app-add-product',
@@ -8,18 +9,47 @@ import {Product} from "../models/product";
 })
 export class AddProductComponent implements OnInit {
 
-  product: Product;
+  product: Product | undefined;
   title: any;
+  form: any = {};
+  selectedFile: File| any;
 
-  constructor() {
+  constructor(private foodService: FoodService) {
 
   }
 
   ngOnInit(): void {
   }
 
-  add(value: any) {
-   // this.product=value;
-    console.log(value.protein, value.description, value.title);
+  onFileChanged($event: Event) {
+    // @ts-ignore
+    this.selectedFile = event.target.files[0];
   }
+
+
+
+  addProduct() {
+    const uploadData = new FormData();
+    uploadData.append('foodProductImage', this.selectedFile);
+    this.form.foodProductImage=null;
+    console.log(this.form.foodProductImage);
+    this.foodService.addFoodProduct(this.form).subscribe((data) => {
+        console.log(data);
+      },
+      error => {
+        console.log(error);
+      });
+  }
+
+  // getProduct(){
+  //   console.log("ceva");
+  //   this.foodSerivce.getFoodList().subscribe(data => {
+  //       console.log(data);
+  //     },
+  //     error => { // error path
+  //       console.log(error);
+  //     });
+  // }
+
+
 }

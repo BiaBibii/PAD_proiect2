@@ -1,3 +1,8 @@
+<app-parallax-image>
+
+</app-parallax-image>
+
+<script src="product.component.ts"></script>
 <div class="restbeef_main_wrapper">
   <div class="restbeef_container">
     <div class="restbeef_content_wrapper restbeef_no_sidebar">
@@ -7,7 +12,8 @@
         <div class="restbeef_tiny">
 
           <!-- Summary Block -->
-          <div class="restbeef_block restbeef_poduct_summary restbeef_js_margin" data-margin="0 0 80px 0" style="margin: 0px 0px 80px;">
+          <div class="restbeef_block restbeef_poduct_summary restbeef_js_margin" data-margin="0 0 80px 0"
+               style="margin: 0px 0px 80px;">
             <div class="restbeef_block_inner">
               <div class="row">
                 <div class="col-6">
@@ -17,23 +23,22 @@
                   <div class="restbeef_poduct_summary_content align_center">
                     <h2>
                       <span class="restbeef_up_title">Summary</span>
-                      Order Info
+                      {{item.title}}
                     </h2>
                     <div class="restbeef_poduct_description">
-                      <h6>Weight and calories</h6>
+                      <h6>Weight and Calories</h6>
                       <p>
-                        <span>200/50/50g</span><span>680 Cal</span>
+                        <span>{{item.servingWeight}} g  </span>  <span>{{item.calories}} Cal</span>
                       </p>
 
-                      <h6>Ingredients</h6>
-                      <p>The highest degree of marbling fillet, greenery, cherry tomatoes.</p>
 
-                      <h6>Allergens</h6>
-                      <p>Milk, Soy, Hot Pepper, Chilli</p>
+                      <h6>Information</h6>
+                      <p> fats:{{item.fats}}, protein:{{item.protein}}, carbohydrates:{{item.carbohydrates}}</p>
+
+
                     </div><!-- .restbeef_poduct_description -->
                     <form class="restbeef_product_order">
-                      <input type="number" class="restbeef_product_qty" value="1">
-                      <input type="submit" class="restbeef_add_to_cart" value="Add to Cart">
+                      <input type="submit" class="restbeef_add_to_cart" value="Add to Cart" (click)="addItemToCart()">
                     </form><!-- .restbeef_product_order -->
                   </div><!-- .restbeef_poduct_summary_content -->
                 </div><!-- .col-6 -->
@@ -48,8 +53,7 @@
               Description
             </h2>
             <div class="restbeef_block_inner">
-              <p>If you like really hot steaks - this is your choice. Served with greenery and cherry tomatoes. VERY STRONG! Pellentesque tincidunt aliquam tempor. Phasellus at odio eu nunc faucibus mattis. Sed blandit auctor auctor. Quisque luctus consequat ultricies. Etiam eget elit eget erat luctus hendrerit eu vel magna. Fusce ac maximus arcu. Suspendisse dignissim nunc non imperdiet rhoncus. Aliquam viverra velit ante, ac egestas ipsum accumsan vel. Maecenas quis mi lacinia, efficitur nibh eget, imperdiet elit. Praesent semper nisi mi, a pharetra nunc malesuada quis. Nam placerat a magna porta pulvinar.</p>
-              <p>The history of this recipe goes far back in time. Maecenas rhoncus sem vitae pharetra ultrices. In hac habitasse platea dictumst. Phasellus ut efficitur ex. Sed porttitor libero faucibus, rhoncus nibh eu, luctus magna. Ut sed magna orci. Praesent egestas sollicitudin eros, eu luctus leo tempus in. In bibendum nisl eu ullamcorper imperdiet. Donec neque lacus, vulputate vitae lectus eu, fringilla interdum lorem. Aliquam viverra velit ante, ac egestas ipsum accumsan vel.</p>
+              <p>{{item.description}}</p>
             </div><!-- .restbeef_block_inner -->
           </div><!-- .restbeef_block -->
 

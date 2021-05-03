@@ -19,6 +19,8 @@ export class RegisterFormComponent implements OnInit {
   password: string | undefined;
   registered: boolean| undefined;
 
+  form: any = {};
+
   private user: User | undefined;
 
   constructor(private router: Router, private toastr: ToastrService, private userService: UserService) {
@@ -27,21 +29,17 @@ export class RegisterFormComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  register(form: any) {
-    this.user = new User(form.username, form.password, 1, form.email, form.prenume, form.nume);
-    console.log(this.user);
-    this.userService.register(this.user).subscribe((data: User) => {
-        this.user = {
-          id: data.id,
-          first_name: data.first_name,
-          last_name: data.last_name,
-          username: data.username,
-          email: data.email,
-          password: data.password,};
+  register() {
+    // this.user = new User(form.username, form.password, 1, form.email, form.prenume, form.nume);
+    console.log(this.form);
+
+    this.userService.register(this.form).subscribe((data) => {
+        console.log(data);
         this.registered=true;
         this.router.navigate(['login']);
       },
     error => { // error path
+      console.log(error);
       this.toastr.error(error.error.message);
     }
   );

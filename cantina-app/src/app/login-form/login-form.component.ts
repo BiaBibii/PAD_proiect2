@@ -3,6 +3,7 @@ import {ActivatedRoute, Router} from "@angular/router";
 import {UserService} from "../services/user.service";
 import {User} from "../models/user";
 import {ToastrService} from "ngx-toastr";
+import {TokenStorageService} from "../services/token-storage.service";
 
 
 @Component({
@@ -17,22 +18,29 @@ export class LoginFormComponent implements OnInit {
 
   private user: User | undefined;
   private error: string | undefined;
+  form: any = {};
+  roles: string[] = [];
 
-  constructor(private toastr: ToastrService, private userService: UserService, private router: Router, private route: ActivatedRoute) {
+  constructor( private tokenStorage: TokenStorageService, private toastr: ToastrService, private userService: UserService, private router: Router, private route: ActivatedRoute) {
   }
 
   ngOnInit(): void {
+    if (this.tokenStorage.getToken()) {
+      this.loggedIn = true;
+      this.roles = this.tokenStorage.getUser().roles;
+    }
   }
 
-  onSubmit(form: any) {
-    // @ts-ignore
-    this.user = new User(form.username, form.password);
+  onSubmit() {
 
-    this.userService.logIn(this.user).subscribe(user => { // success path
+    this.userService.login(this.form).subscribe(data => { // success path
+        this.tokenStorage.saveToken(data.accessToken);
+        this.tokenStorage.saveUser(data);
+        this.roles = this.tokenStorage.getUser().roles;
         // to do
         this.loggedIn = true;
         this.router.navigate(['acasa']);
-        this.userService.logInSuccess(user.username);
+        this.userService.logInSuccess(this.form.username);
       },
       error => { // error path
         this.toastr.error(error.error.message);

@@ -2,13 +2,13 @@
 
 <div class="menu-item">
   <div class="menu-item-details">
-    <div class="menu-item-desc"><a >Fried Potatoes</a></div>
+    <div class="menu-item-desc"><a [routerLink]="['/product', item.id]">{{item.title}}</a></div>
     <div class="menu-item-dot"></div>
     <div class="menu-item-prices">
-      <div class="menu-item-price">$130</div>
+      <div class="menu-item-price">${{item.price}}</div>
     </div>
   </div>
-  <p>Excepteur sint occaecat cupidatat noproident</p>
+  <p>Serving weight: {{item.servingWeight}}g</p>
 </div>
 
 <!--menu item end-->

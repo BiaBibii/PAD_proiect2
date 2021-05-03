@@ -8,11 +8,11 @@ import {ForgetPasswordComponent} from "./forget-password/forget-password.compone
 import {PageNotFoundComponent} from "./page-not-found/page-not-found.component";
 import {AdminComponent} from "./admin/admin.component";
 import {AddProductComponent} from "./add-product/add-product.component";
-import {EditProductComponent} from "./edit-product/edit-product.component";
+import {EditProductComponent} from "./table-edit-product/edit-product.component";
 import {LoginAuthGuard} from "./login-auth.guard";
-import {ProductsListComponent} from "./products-list/products-list.component";
+import {ProductsListComponent} from "./menu/products-list.component";
 import {CartComponent} from "./cart/cart.component";
-
+import {ProductComponent} from "./product/product.component";
 
 const routes: Routes = [
   {path: '', redirectTo: 'acasa', pathMatch: 'full'},
@@ -22,7 +22,9 @@ const routes: Routes = [
   {path: 'register', component: RegisterFormComponent},
   {path: 'forget-password', component: ForgetPasswordComponent},
   {path: 'menu', component: ProductsListComponent},
+  {path: 'product/:id', component: ProductComponent},
   {path: 'my-cart', component: CartComponent},
+
   // { path: '**', component: PageNotFoundComponent},
   {
     path: 'admin',

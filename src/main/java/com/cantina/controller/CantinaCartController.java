@@ -4,14 +4,7 @@ import java.security.Principal;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import com.cantina.model.CantinaCart;
 import com.cantina.model.CartItem;
@@ -52,8 +45,8 @@ public class CantinaCartController {
 		return cartItemList;
 	}
 	
-	@PostMapping("/addProductToCartItem")
-	public CartItem addProductToCartItem(@RequestParam("id") Long id, Principal principal) {
+	@PostMapping("/addProductToCartItem/{id}")
+	public CartItem addProductToCartItem(@PathVariable("id") Long id, Principal principal) {
 		
 		User user = userService.findByUsername(principal.getName());
 		FoodProduct foodProduct = foodProductService.findById(id);
@@ -63,14 +56,14 @@ public class CantinaCartController {
 		return cartItem;
 	}
 	
-	@DeleteMapping("/deleteProductFromCart")
-	public void deleteItemFromCart(@RequestParam("id") Long id) {
+	@DeleteMapping("/deleteProductFromCart/{id}")
+	public void deleteItemFromCart(@PathVariable("id") Long id) {
 		 cartItemService.deleteItemFromCart(cartItemService.findById(id));
 	}
 	
 	@PostMapping("/updateCartItem")
 	public CartItem updateCantinaCart(@RequestParam("qty") String qty, @RequestParam("id") Long id) {
-		
+
 		CartItem cartItem = cartItemService.findById(id);
 		cartItem.setQty(Integer.parseInt(qty));
 		cartItem = cartItemService.updateCartItem(cartItem);

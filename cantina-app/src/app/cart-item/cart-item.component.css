@@ -1,0 +1,46 @@
+
+
+.order-money {
+  margin-top: 15px;
+  font-family: 'Playball';
+  font-size: 18px;
+}
+
+.order-count {
+  border: none;
+  width: 60px;
+  height: 50px;
+  text-align: center;
+  font-weight: bold;
+}
+
+.product-name {
+  padding-top: 12px;
+}
+
+
+
+
+@charset "utf-8";
+.nav-separator:before, .nav-separator:after, nav:after, .bold-separator:before, .bold-separator:after, #submit:hover, .to-top-holder:before, .ic__days .ic__day_state_current, .ic__days .ic__day_state_selected, .ic__days .ic__day:hover, .scroll-nav li a.actscroll:before, .scroll-nav ul:before, .scroll-nav ul:after, footer:after, .hot-desc, .content-pagination a.current-page, .content-pagination a:hover, .shopping-cart-link-count, .quantity input.qty, .order-count, .hero-title h4:before, .hero-title h4:after, .current-page, .pagination a:hover {
+  background: #C59D5F;
+}
+
+nav li a.act-link, nav li a:hover, .nav-social h3, .nav-social li a:hover, .parallax-section h3, .section-title h3, .team-slider h3, #submit, .to-top, #submit-res, .link, .tooltip, .hero-link a:hover, .to-top-holder p span, #twitter-feed li a, .twitter-holder .customNavigation a:hover, #subscribe .subscribe-button, .twitter-holder .customNavigation a.twit-link, .footer-social h3, .footer-contacts li a:hover, .footer-social ul li a:hover, .subscribe-message i, .section-icon, .testimonials-holder h4 a, .chefinfo, .team-social li a:hover, .team-modal h5, .popup-modal-dismiss:hover, .promotion-price, .big-number a, .testimonials-holder .customNavigation a:hover, .testimonials-slider ul li, .menu-item a:hover, .product-cats li a, .product-price a, .shopping-cart-link, .subnav a:hover span, .product-rating, .product-item-price span, .quantity a, .product-meta span a, .tabs-menu .current a, .order-money, .product-name a:hover, .product-name, .coupon-holder button:hover, .cart-totals button, .search-submit, .post-tags li a:hover, .tagcloud li a:hover, .post-link:hover, .slides-navigation a:hover, .post-meta i, .gallery-filters a.gallery-filter-active, .box-item i, .fullheight-carousel-holder .customNavigation a:hover, .carousel-link-holder h4, #success_page p strong {
+  color: #C59D5F;
+}
+
+.hot-deal:before {
+  border: 2px solid #C59D5F;
+}
+
+.team-modal:before, .half-circle {
+  border: 4px double #C59D5F;
+}
+
+.half-circle {
+  border: 3px solid #C59D5F;
+}
+
+
+
