@@ -1,0 +1,20 @@
+
+  <td class="hidden-xs" style="display: none">
+    <!--            <a href="#"><img src="images/gallery/1.jpg" alt="" class="respimg"></a>-->
+  </td>
+  <td>
+    <h5 class="product-name">{{item.foodProduct.title}}</h5>
+  </td>
+  <td class="hidden-xs">
+    <h5 class="order-money">{{item.foodProduct.price}} $</h5>
+  </td>
+  <td class="hidden-xs">
+    <input type="number" (change)="changeCount()" id="count{{item.foodProduct.id}}"  value="{{item.qty}}" max="50" min="1" class="order-count">
+  </td>
+  <td class="hidden-xs">
+    <h5 class="order-money">{{price*count}} $</h5>
+  </td>
+  <td class="pr-remove">
+    <button  (click)="deleteCartItem()" title="Remove" style="color: black  !important;"><i class="fa fa-times"></i></button>
+  </td>
+

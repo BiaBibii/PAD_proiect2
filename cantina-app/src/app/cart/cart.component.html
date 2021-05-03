@@ -17,28 +17,8 @@
           <th></th>
         </tr>
 
-
 <!--        ng for pentru produseeeeeeee---------------------------------->
-        <tr>
-          <td class="hidden-xs" style="display: none">
-<!--            <a href="#"><img src="images/gallery/1.jpg" alt="" class="respimg"></a>-->
-          </td>
-          <td>
-            <h5 class="product-name">Cake Monro</h5>
-          </td>
-          <td class="hidden-xs">
-            <h5 class="order-money">$56.00</h5>
-          </td>
-          <td class="hidden-xs">
-            <input type="number" name="" value="1" max="50" min="1" class="order-count">
-          </td>
-          <td class="hidden-xs">
-            <h5 class="order-money">$56.00</h5>
-          </td>
-          <td class="pr-remove">
-            <a href="#" title="Remove" style="color: black  !important;"><i class="fa fa-times"></i></a>
-          </td>
-        </tr>
+        <tr *ngFor="let item of items" app-cart-item [item]="item" ></tr>
 
       </table>
     </div>

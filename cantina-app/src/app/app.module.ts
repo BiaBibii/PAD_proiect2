@@ -30,6 +30,7 @@ import { CartComponent } from './cart/cart.component';
 import { authInterceptorProviders } from './_helpers/auth.interceptor';
 import { FilterPipe } from './filter.pipe';
 import { ProductEditComponent } from './product-edit/product-edit.component';
+import { CartItemComponent } from './cart-item/cart-item.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -53,6 +54,7 @@ import { ProductEditComponent } from './product-edit/product-edit.component';
     CartComponent,
     FilterPipe,
     ProductEditComponent,
+    CartItemComponent,
 
   ],
   imports: [

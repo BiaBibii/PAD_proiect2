@@ -101,6 +101,7 @@
 }
 
 .order-money {
+  margin-top: 15px;
   font-family: 'Playball', cursive;
   font-size: 18px;
 }
@@ -114,7 +115,7 @@
 }
 
 .product-name {
-  font-weight: bold;
+  padding-top: 12px;
 }
 
 .coupon-holder {

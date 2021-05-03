@@ -13,8 +13,14 @@ export class ProductEditComponent implements OnInit {
 
   @Input()
   item: Product | any;
+  title: any;
+  servingWeight: any;
+  fats: any;
+  protein: any;
+  calories: any;
+  carbohydrates: any;
+  price: any;
 
-  upitem: any = {};
 
 
   constructor(private foodService: FoodService) {
@@ -24,18 +30,17 @@ export class ProductEditComponent implements OnInit {
   }
 
   setUpItem(){
-    if((<HTMLInputElement>document.getElementById("active")).checked)
-      this.item.active=1;
-    else
-      this.item.active=0;
+    console.log(this.item.active);
 
-    this.item.title=(<HTMLInputElement>document.getElementById("title")).value;
-    this.item.servingWeight=(<HTMLInputElement>document.getElementById("servingWeight")).value;
-    this.item.fats=(<HTMLInputElement>document.getElementById("fats")).value;
-    this.item.protein=(<HTMLInputElement>document.getElementById("protein")).value;
-    this.item.calories=(<HTMLInputElement>document.getElementById("calories")).value;
-    this.item.carbohydrates=(<HTMLInputElement>document.getElementById("carbohydrates")).value;
-    this.item.price=(<HTMLInputElement>document.getElementById("price")).value;
+    this.item.active=(<HTMLInputElement>document.getElementById("active"+this.item.id)).checked;
+    console.log(this.item.active);
+    this.item.title=(<HTMLInputElement>document.getElementById("title"+this.item.id)).value;
+    this.item.servingWeight=(<HTMLInputElement>document.getElementById("servingWeight"+this.item.id)).value;
+    this.item.fats=(<HTMLInputElement>document.getElementById("fats"+this.item.id)).value;
+    this.item.protein=(<HTMLInputElement>document.getElementById("protein"+this.item.id)).value;
+    this.item.calories=(<HTMLInputElement>document.getElementById("calories"+this.item.id)).value;
+    this.item.carbohydrates=(<HTMLInputElement>document.getElementById("carbohydrates"+this.item.id)).value;
+    this.item.price=(<HTMLInputElement>document.getElementById("price"+this.item.id)).value;
 
   }
 

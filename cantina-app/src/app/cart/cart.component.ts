@@ -1,4 +1,6 @@
 import {Component, OnInit} from '@angular/core';
+import {CartService} from "../services/cart.service";
+import {Product} from "../models/product";
 
 @Component({
   selector: 'app-cart',
@@ -7,11 +9,19 @@ import {Component, OnInit} from '@angular/core';
 })
 export class CartComponent implements OnInit {
   img = "/assets/img/contact_top.jpg"
+  items: Product[] | any;
 
-  constructor() {
+  constructor(private cartService: CartService) {
   }
 
   ngOnInit(): void {
+    this.cartService.getCartItems().subscribe((items) => {
+        this.items=items;
+        console.log(this.items);
+      },
+      error => {
+      console.log(error);
+      });
   }
 
 }

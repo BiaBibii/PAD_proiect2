@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {FoodService} from "../services/food.service";
 import {Product} from "../models/product";
 import {ActivatedRoute, Router} from "@angular/router";
+import {CartService} from "../services/cart.service";
 
 @Component({
   selector: 'app-product',
@@ -10,10 +11,10 @@ import {ActivatedRoute, Router} from "@angular/router";
 })
 export class ProductComponent implements OnInit {
 
-  item: Product| any;
-  id: number| any;
+  item: Product | any;
+  id: number | any;
 
-  constructor(private foodService: FoodService, private router: Router,private route: ActivatedRoute) {
+  constructor(private cartService: CartService, private foodService: FoodService, private router: Router, private route: ActivatedRoute) {
   }
 
   ngOnInit(): void {
@@ -21,10 +22,18 @@ export class ProductComponent implements OnInit {
       this.id = +params['id']; // (+) converts string 'id' to a number
       console.log(this.id);
     });
-    this.foodService.getFoodProductById(this.id).subscribe(data=>{
-      this.item=data;
+    this.foodService.getFoodProductById(this.id).subscribe(data => {
+      this.item = data;
     });
 
   }
 
+  addItemToCart() {
+    this.cartService.addProductToCart(this.id).subscribe((data) => {
+        console.log(data);
+      },
+      error => {
+        console.log(error);
+      });
+  }
 }
