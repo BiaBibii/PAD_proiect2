@@ -1,6 +1,7 @@
 package com.cantina.model;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -12,6 +13,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 import com.cantina.model.security.Role;
@@ -27,6 +29,15 @@ public class User {
 	//@NotBlank
 	//@Size(max = 20)
 	private String username;
+	
+	
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
+	@JsonIgnore
+	private List<UserPayment> userPaymentList;
+	
+	@OneToMany(mappedBy= "user")
+	@JsonIgnore
+	private List<Order> orderList;
 
 	public String getFirstName() {
 		return firstName;
@@ -50,6 +61,14 @@ public class User {
 
 	public void setCantinaCart(CantinaCart cantinaCart) {
 		this.cantinaCart = cantinaCart;
+	}
+	
+	public List<UserPayment> getUserPaymentList() {
+		return userPaymentList;
+	}
+	
+	public void setUserPaymentList(List<UserPayment> userPaymentList) {
+		this.userPaymentList = userPaymentList;
 	}
 
 	//@NotBlank

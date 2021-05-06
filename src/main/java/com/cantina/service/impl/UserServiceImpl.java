@@ -1,5 +1,6 @@
 package com.cantina.service.impl;
 
+import java.util.List;
 import java.util.Set;
 
 import org.slf4j.Logger;
@@ -10,9 +11,11 @@ import org.springframework.stereotype.Service;
 
 import com.cantina.model.CantinaCart;
 import com.cantina.model.User;
+import com.cantina.model.UserPayment;
 import com.cantina.model.security.Role;
 import com.cantina.payload.request.SignupRequest;
 import com.cantina.repository.RoleRepository;
+import com.cantina.repository.UserPaymentRepository;
 import com.cantina.repository.UserRepository;
 import com.cantina.service.UserService;
 
@@ -29,6 +32,9 @@ public class UserServiceImpl implements UserService {
 	
 	@Autowired
 	private RoleRepository roleRepository;
+	
+	@Autowired
+	private UserPaymentRepository userPaymentRepository;
 	
 	@Override
 	public User findByEmail(String email) {
@@ -80,6 +86,22 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public User findById(Long id) {
 		return userRepository.findById(id).get();
+	}
+	
+	@Override
+	public void setUserDefaultPayment(UserPayment userPayment, User user) {
+		List<UserPayment> userPaymentList = user.getUserPaymentList();
+
+		for (UserPayment up : userPaymentList) {
+			if (up.getId() == userPayment.getId()) {
+				up.setDefaultPayment(true);
+				userPaymentRepository.save(up);
+			} else {
+				up.setDefaultPayment(false);
+				userPaymentRepository.save(up);
+			}
+		}
+
 	}
 
 }

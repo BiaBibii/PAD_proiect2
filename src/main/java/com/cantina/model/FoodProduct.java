@@ -29,6 +29,7 @@ public class FoodProduct {
 	private double carbohydrates;
 	private double fats;
 	private double servingWeight;
+	private int qty;
 	
 	@Column(columnDefinition="text")
 	private String description;
@@ -114,6 +115,14 @@ public class FoodProduct {
 		this.fats = fats;
 	}
 
+	public int getQty() {
+		return qty;
+	}
+
+	public void setQty(int qty) {
+		this.qty = qty;
+	}
+	
 	public String getDescription() {
 		return description;
 	}

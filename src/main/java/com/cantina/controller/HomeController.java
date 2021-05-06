@@ -20,15 +20,20 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.cantina.model.CantinaCart;
 import com.cantina.model.User;
+import com.cantina.model.UserPayment;
 import com.cantina.model.dao.ForgetPasswordDao;
 import com.cantina.model.dao.UserDao;
+import com.cantina.model.dao.UserPaymentDao;
 import com.cantina.model.security.ERole;
 import com.cantina.model.security.Role;
 import com.cantina.payload.request.LoginRequest;
@@ -39,6 +44,7 @@ import com.cantina.repository.RoleRepository;
 import com.cantina.repository.UserRepository;
 import com.cantina.security.jwt.JwtUtils;
 import com.cantina.security.services.UserDetailsImpl;
+import com.cantina.service.UserPaymentService;
 import com.cantina.service.UserService;
 import com.cantina.utility.MailConstructor;
 import com.cantina.utility.SecurityUtility;
@@ -71,6 +77,9 @@ public class HomeController {
 
 	@Autowired
 	private UserService userService;
+	
+	@Autowired
+	private UserPaymentService userPaymentService;
 
 	@RequestMapping(value = "/logout")
 	public String logout(HttpServletRequest request, HttpServletResponse response) {
@@ -215,6 +224,91 @@ public class HomeController {
 		LoginRequest loginRequest = new LoginRequest(currentUser.getUsername(), user.getPassword());
 		
 		return authenticateUser(loginRequest);
+	}
+	
+	@PostMapping("/setDefaultPayment")
+	public UserPayment setDefaultPayment(@RequestParam("id") Long userPaymentId, Principal principal) {
+
+		User user = userService.findByUsername(principal.getName());
+		UserPayment userPayment = userPaymentService.findById(userPaymentId);
+		
+		userService.setUserDefaultPayment(userPayment,user);
+
+		return userPayment;
+	}
+	
+	@PostMapping("/addUserPayment")
+	public UserPayment addUserPayment(@RequestBody UserPaymentDao userPayment, Principal principal) throws Exception {
+		
+		User user = userService.findByUsername(principal.getName());
+		List<UserPayment> userPaymentList = user.getUserPaymentList();
+		
+		UserPayment newUserPayment = new UserPayment();
+		newUserPayment.setType(userPayment.getType());
+		newUserPayment.setCardName(userPayment.getCardName());
+		newUserPayment.setCardNumber(userPayment.getCardNumber());
+		newUserPayment.setExpiryMonth(userPayment.getExpiryMonth());
+		newUserPayment.setExpiryYear(userPayment.getExpiryYear());
+		newUserPayment.setCvc(userPayment.getCvc());
+		newUserPayment.setHolderName(userPayment.getHolderName());
+		newUserPayment.setDefaultPayment(userPayment.getDefaultPayment());
+		newUserPayment.setUser(user);
+		
+		userPaymentList.add(newUserPayment);
+		
+		newUserPayment = userPaymentService.save(newUserPayment);
+		userService.saveUser(user);
+		
+		return newUserPayment;
+		
+	}
+	
+	@GetMapping("/getUserPaymentList")
+	public List<UserPayment> getUserPaymentList(Principal principal){
+		
+		User user = userService.findByUsername(principal.getName());
+		List<UserPayment> userPaymentList = user.getUserPaymentList();
+		
+		return userPaymentList;
+	}
+	
+	@DeleteMapping("/deleteUserPayment")
+	public UserPayment deleteUserPayment(@RequestParam("id") Long id) throws Exception {
+		
+		UserPayment userPayment = userPaymentService.findById(id);
+		
+		if(userPayment == null) {
+			throw new Exception("User Payment not found. Nothing to delete!");
+		}
+		
+		userPaymentService.removeById(id);
+		
+		return userPayment;
+	}
+	
+	//pune hidden id
+	@PostMapping("/updateUserPayment")
+	public UserPayment updateUserPayment(@RequestBody UserPaymentDao userPayment,@RequestParam("id") Long id) throws Exception {
+		
+		UserPayment updatedUserPayment = userPaymentService.findById(id);
+		
+		if(updatedUserPayment == null) {
+			throw new Exception("This user payment does not exist!");
+		}
+		
+		updatedUserPayment.setType(userPayment.getType());
+		updatedUserPayment.setCardName(userPayment.getCardName());
+		updatedUserPayment.setCardNumber(userPayment.getCardNumber());
+		updatedUserPayment.setExpiryMonth(userPayment.getExpiryMonth());
+		updatedUserPayment.setExpiryYear(userPayment.getExpiryYear());
+		updatedUserPayment.setCvc(userPayment.getCvc());
+		updatedUserPayment.setHolderName(userPayment.getHolderName());
+		updatedUserPayment.setDefaultPayment(userPayment.getDefaultPayment());
+		
+		updatedUserPayment = userPaymentService.save(updatedUserPayment);
+		
+		return updatedUserPayment;
+		
 	}
 
 }
