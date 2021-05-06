@@ -38,5 +38,18 @@ public class CantinaCartServiceImpl implements CantinaCartService {
 		return cantinaCart;
 		
 	}
+	
+	@Override
+	public void clearCantinaCart(CantinaCart cantinaCart) {
+		List<CartItem> cartItemList = cartItemService.findByCantinaCart(cantinaCart);		
+		for (CartItem cartItem : cartItemList) {
+			cartItem.setCantinaCart(null);
+			cartItemService.save(cartItem);
+		}
+		
+		cantinaCart.setGrandTotal(new BigDecimal(0));
+		
+		cantinaCartRepository.save(cantinaCart);
+	}
 
 }

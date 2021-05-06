@@ -33,6 +33,10 @@ public class CartItem {
 	@JoinColumn(name="cantina_cart_id")
 	private CantinaCart cantinaCart;
 	
+	@ManyToOne
+	@JoinColumn(name="order_id")
+	private Order order;
+	
 	
 
 	public FoodProduct getFoodProduct() {
@@ -83,8 +87,13 @@ public class CartItem {
 		this.subTotal = subTotal;
 	}
 
-	
+	public Order getOrder() {
+		return order;
+	}
 
+	public void setOrder(Order order) {
+		this.order = order;
+	}
 	
 
 	

@@ -48,6 +48,7 @@ public class FoodController {
 		newFoodProduct.setProtein(foodProduct.getProtein());
 		newFoodProduct.setCarbohydrates(foodProduct.getCarbohydrates());
 		newFoodProduct.setFats(foodProduct.getFats());
+		newFoodProduct.setQty(foodProduct.getQty());
 		newFoodProduct.setServingWeight(foodProduct.getServingWeight());
 		newFoodProduct.setDescription(foodProduct.getDescription());
 		
@@ -99,6 +100,7 @@ public class FoodController {
 		updatedFoodProduct.setProtein(foodProduct.getProtein());
 		updatedFoodProduct.setCarbohydrates(foodProduct.getCarbohydrates());
 		updatedFoodProduct.setFats(foodProduct.getFats());
+		updatedFoodProduct.setQty(foodProduct.getQty());
 		updatedFoodProduct.setServingWeight(foodProduct.getServingWeight());
 		updatedFoodProduct.setDescription(foodProduct.getDescription());
 		
