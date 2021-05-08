@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
-
+import { NgPaymentCardModule } from 'ng-payment-card';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NavBarComponent } from './nav-bar/nav-bar.component';
@@ -31,6 +31,7 @@ import { authInterceptorProviders } from './_helpers/auth.interceptor';
 import { FilterPipe } from './filter.pipe';
 import { ProductEditComponent } from './product-edit/product-edit.component';
 import { CartItemComponent } from './cart-item/cart-item.component';
+import { CheckoutComponent } from './checkout/checkout.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -55,6 +56,7 @@ import { CartItemComponent } from './cart-item/cart-item.component';
     FilterPipe,
     ProductEditComponent,
     CartItemComponent,
+    CheckoutComponent,
 
   ],
   imports: [
@@ -65,6 +67,7 @@ import { CartItemComponent } from './cart-item/cart-item.component';
     HttpClientModule,
     BrowserAnimationsModule, // required animations module
     ToastrModule.forRoot(), // ToastrModule added
+    NgPaymentCardModule
   ],
   providers: [authInterceptorProviders],
   bootstrap: [AppComponent]

@@ -1,0 +1,31 @@
+<div class="contact-clean"   >
+  <form method="post" *ngIf="!card_val">
+    <h2 class="text-center">Get in touch</h2>
+    <h3 style="color: #212121; margin-top: -40px;" class="text-center">No. #112</h3>
+    <div class="form-group"><input class="form-control" type="text" name="name" placeholder="Name"></div>
+    <div class="form-group"><input class="form-control" type="email" name="email" placeholder="Email"></div>
+
+
+    <div class="custom-control custom-radio">
+      <input type="radio" class="custom-control-input" id="defaultUnchecked" name="defaultExampleRadios" value="there" (change)="onThereChange()" checked mdbInput>
+      <label class="custom-control-label" for="defaultUnchecked">Pay there</label>
+    </div>
+
+    <div class="custom-control custom-radio">
+      <input type="radio" class="custom-control-input" id="defaultChecked" name="defaultExampleRadios"   (change)="onCardChange()"  mdbInput>
+      <label class="custom-control-label" for="defaultChecked">Pay with card</label>
+    </div>
+
+
+
+    <div (click)="submit()" class="form-group"><button class="btn btn-primary" type="submit">Next </button></div>
+  </form>
+
+
+<div style="width: 45% !important; padding-top: 50px; margin-left: 27.5%" >
+  <ng-payment-card  (formSaved)="processPayment()" *ngIf="card_val" ></ng-payment-card>
+</div>
+</div>
+
+
+
