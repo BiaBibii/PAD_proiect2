@@ -12,6 +12,7 @@ public class FoodProductDao {
 	private double carbohydrates;
 	private double fats;
 	private double servingWeight;
+	private int qty;
 	
 	private MultipartFile foodProductImage;
 	
@@ -75,6 +76,14 @@ public class FoodProductDao {
 
 	public void setFats(double fats) {
 		this.fats = fats;
+	}
+	
+	public int getQty() {
+		return qty;
+	}
+
+	public void setQty(int qty) {
+		this.qty = qty;
 	}
 
 	public double getServingWeight() {

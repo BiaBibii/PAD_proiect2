@@ -4,4 +4,6 @@ import com.cantina.model.CantinaCart;
 
 public interface CantinaCartService {
 	public CantinaCart updateCantinaCart(CantinaCart cantinaCart);
+	public void clearCantinaCart(CantinaCart cantinaCart);
+	
 }
