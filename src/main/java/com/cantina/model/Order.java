@@ -30,6 +30,7 @@ public class Order {
 	private List<CartItem> cartItemList;
 	
 	@OneToOne(cascade = CascadeType.ALL)
+	@JsonIgnore
 	private Payment payment;
 	
 	@ManyToOne

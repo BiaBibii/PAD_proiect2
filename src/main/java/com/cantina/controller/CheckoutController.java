@@ -9,21 +9,17 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.cantina.model.CantinaCart;
 import com.cantina.model.CartItem;
 import com.cantina.model.Order;
-import com.cantina.model.Payment;
 import com.cantina.model.User;
 import com.cantina.model.UserPayment;
 import com.cantina.model.dao.CheckoutDao;
 import com.cantina.service.CantinaCartService;
 import com.cantina.service.CartItemService;
 import com.cantina.service.OrderService;
-import com.cantina.service.PaymentService;
-import com.cantina.service.UserPaymentService;
 import com.cantina.service.UserService;
 import com.cantina.utility.MailConstructor;
 
@@ -32,7 +28,7 @@ import com.cantina.utility.MailConstructor;
 @RequestMapping("/api/checkout")
 public class CheckoutController {
 	
-	private Payment payment = new Payment();
+	
 
 	@Autowired
 	private UserService userService;
@@ -40,11 +36,6 @@ public class CheckoutController {
 	@Autowired
 	private CartItemService cartItemService;
 
-	@Autowired
-	private PaymentService paymentService;
-
-	@Autowired
-	private UserPaymentService userPaymentService;
 	
 	@Autowired
 	private JavaMailSender mailSender;
@@ -103,29 +94,11 @@ public class CheckoutController {
 			 order = orderService.createOrder(cantinaCart, userPayment, user);
 		}
 	
-		//mailSender.send(mailConstructor.constructOrderConfirmationEmail(user, order, Locale.ENGLISH));
+		mailSender.send(mailConstructor.constructOrderConfirmationEmail(user, order));
 		
 		cantinaCartService.clearCantinaCart(cantinaCart);
 	
 		return order;
 	}
-
-	
-	@PostMapping("/setPaymentMethod")
-	public Payment setPaymentMethod(@RequestParam("userPaymentId") Long userPaymentId, Principal principal) throws Exception {
-
-		User user = userService.findByUsername(principal.getName());
-		UserPayment userPayment = userPaymentService.findById(userPaymentId);
-
-		if (userPayment.getUser().getId() != user.getId()) {
-			throw new Exception("This is not your payment card");
-		} else { 
-			Payment newPayment = paymentService.setByUserPayment(userPayment, payment);
-			
-			
-			return newPayment;
-		}
-	}
-	
 
 }
