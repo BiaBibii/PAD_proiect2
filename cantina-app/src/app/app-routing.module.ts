@@ -14,6 +14,8 @@ import {ProductsListComponent} from "./menu/products-list.component";
 import {CartComponent} from "./cart/cart.component";
 import {ProductComponent} from "./product/product.component";
 import {CheckoutComponent} from "./checkout/checkout.component";
+import {ProfileComponent} from "./profile/profile.component";
+import {AddNewCardComponent} from "./add-new-card/add-new-card.component";
 
 const routes: Routes = [
   {path: '', redirectTo: 'acasa', pathMatch: 'full'},
@@ -26,6 +28,8 @@ const routes: Routes = [
   {path: 'product/:id', component: ProductComponent},
   {path: 'my-cart', component: CartComponent},
   {path: 'checkout', component: CheckoutComponent},
+  {path: 'profile', component: ProfileComponent},
+  {path: 'add-card', component: AddNewCardComponent},
 
   // { path: '**', component: PageNotFoundComponent},
   {

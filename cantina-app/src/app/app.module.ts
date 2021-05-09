@@ -32,6 +32,11 @@ import { FilterPipe } from './filter.pipe';
 import { ProductEditComponent } from './product-edit/product-edit.component';
 import { CartItemComponent } from './cart-item/cart-item.component';
 import { CheckoutComponent } from './checkout/checkout.component';
+import { ProfileComponent } from './profile/profile.component';
+import { ProfileEditFormComponent } from './profile-edit-form/profile-edit-form.component';
+import { CardsTableComponent } from './cards-table/cards-table.component';
+import { CardProfileComponent } from './card-profile/card-profile.component';
+import { AddNewCardComponent } from './add-new-card/add-new-card.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -57,6 +62,11 @@ import { CheckoutComponent } from './checkout/checkout.component';
     ProductEditComponent,
     CartItemComponent,
     CheckoutComponent,
+    ProfileComponent,
+    ProfileEditFormComponent,
+    CardsTableComponent,
+    CardProfileComponent,
+    AddNewCardComponent,
 
   ],
   imports: [

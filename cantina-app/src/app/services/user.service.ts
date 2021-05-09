@@ -54,6 +54,10 @@ export class UserService {
     }, httpOptions);
   }
 
+  updateUserInfo(newInfo:any){
+    return this.http.post(this.url+'updateUserInformation', newInfo);
+  }
+
 
   logInSuccess(username: string) {
     this.isLogin.next(true);
@@ -64,6 +68,8 @@ export class UserService {
     localStorage.setItem('STATE', 'true');
     localStorage.setItem('ROLE', this.roleAs.getValue());
   }
+
+
 
   logOut() {
     this.isLogin.next(false);
@@ -84,6 +90,23 @@ export class UserService {
   forgetPassword(email: string) {
     return this.http.post(this.url + 'forgetPassword', email)
   }
+
+
+//  card
+  addUserCard(card:any){
+    return this.http.post(this.url+'addUserPayment', card);
+  }
+
+  getCards(){
+    return this.http.get(this.url+'getUserPaymentList');
+  }
+
+  deleteUserCard(id:any){
+    return this.http.delete(this.url+'deleteUserPayment?id='+id);
+  }
+
+
+//  end card
 
 
 }
