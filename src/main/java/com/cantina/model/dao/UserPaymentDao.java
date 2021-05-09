@@ -1,16 +1,10 @@
 package com.cantina.model.dao;
 
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 
 import com.cantina.model.User;
 
 public class UserPaymentDao {
 	
-	private Long id;
 	private String type;
 	private String cardName;
 	private String cardNumber;
@@ -23,13 +17,6 @@ public class UserPaymentDao {
 	
 	public UserPaymentDao() {}
 
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
 
 	public String getType() {
 		return type;

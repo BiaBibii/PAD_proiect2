@@ -6,6 +6,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class Payment {
 	@Id
@@ -20,6 +22,7 @@ public class Payment {
 	private String holderName;
 	
 	@OneToOne
+	@JsonIgnore
 	private Order order;
 	
 	public Order getOrder() {
