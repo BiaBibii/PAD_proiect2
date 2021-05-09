@@ -1,0 +1,33 @@
+#h1{
+  font-family: Playball,cursive;
+  font-weight: bold;
+  color: white;
+  letter-spacing: 3px;
+  margin-top: 30vh;
+}
+#h2{
+  color: #C59D5F;
+  font-size: 44px;
+  font-family: 'Playball', cursive;
+}
+#h21{
+  margin-top: -10px;
+  font-weight: bold;
+}
+#h3{
+  color: #C59D5F;
+  font-size: 20px;
+  font-family: 'Playball';
+  font-weight: bold;
+}
+#h4{
+  margin-top: 20vh;
+  font-family: 'Source Sans Pro', sans-serif;
+  font-weight: bold;
+  color: white;
+}
+#h5{
+  font-family: 'Source Sans Pro', sans-serif;
+  font-weight: bold;
+  color: white;
+}

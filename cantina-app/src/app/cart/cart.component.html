@@ -17,8 +17,8 @@
           <th></th>
         </tr>
 
-<!--        ng for pentru produseeeeeeee---------------------------------->
-        <tr *ngFor="let item of items" app-cart-item [item]="item" ></tr>
+        <!--        ng for pentru produseeeeeeee---------------------------------->
+        <tr *ngFor="let item of items" app-cart-item [item]="item"></tr>
 
       </table>
     </div>
@@ -26,40 +26,28 @@
   <!-- /CHECKOUT TABLE -->
   <!-- COUPON -->
   <div class="row">
-    <div class="coupon-holder">
+    <div class="cart-totals">
       <div class="col-md-12">
-        <input type="text" name="" placeholder="Coupon code">
-        <button type="submit" class="btn-a">Apply</button>
-<!--        <button type="submit" class="pull-right btn-uc">Update Cart</button>-->
+
+
+
+            <button routerLink="/checkout" type="submit" class="btn btn-lg btn-block btn-round btn-d">Proceed to Checkout</button>
+
+
       </div>
+
+
+
     </div>
+
+
+
   </div>
   <!-- /COUPON -->
   <!-- CART TOTALS  -->
-  <div class="row">
 
-    <div class="col-sm-5 col-sm-offset-7" >
-      <div class="cart-totals">
-        <h4>Cart Totals</h4>
-        <table class="table table-border checkout-table">
-          <tbody>
-          <tr>
-            <th>Cart Subtotal:</th>
-            <td>$40.00</td>
-          </tr>
-          <tr>
-            <th>Discount</th>
-            <td>- $2.00</td>
-          </tr>
-          <tr>
-            <th>Total:</th>
-            <td>$38.00</td>
-          </tr>
-          </tbody>
-        </table>
-        <button type="submit" class="btn btn-lg btn-block btn-round btn-d">Proceed to Checkout</button>
-      </div>
-    </div>
-  </div>
+
+
+
   <!-- /CART TOTALS  -->
 </div>

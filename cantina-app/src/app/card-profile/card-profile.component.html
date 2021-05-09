@@ -1,0 +1,19 @@
+<td><label type="text" style="width: 80px" id="cardName{{card.id}}" name="cardName"
+           id="cardName">{{card.cardName}}</label></td>
+<td><label type="text" style="width: 160px" id="cardNumber{{card.id}}" name="cardNumber"
+           id="cardNumber">{{card.cardNumber}}</label></td>
+<td><label type="text" style="width: 80px" id="cvc{{card.id}}" name="cvc" id="cvc">{{card.cvc}}</label></td>
+<td><label type="text" style="width: 80px" id="expiryYear{{card.id}}" name="expiryYear"
+           id="expiryYear">{{card.expiryYear}}</label></td>
+<td><label type="text" style="width: 80px" id="expiryMonth{{card.id}}" name="expiryMonth"
+           id="expiryMonth">{{card.expiryMonth}}</label></td>
+<td><label type="text" style="width: 80px" id="holderName{{card.id}}" name="holderName"
+           id="holderName">{{card.holderName}}</label></td>
+
+
+<td>
+  <button (click)="deleteCard()">
+    <i class="fas fa-trash"></i>
+  </button>
+</td>
+
