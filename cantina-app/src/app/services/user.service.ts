@@ -105,6 +105,12 @@ export class UserService {
     return this.http.delete(this.url+'deleteUserPayment?id='+id);
   }
 
+  setDefaultCard(id:any){
+    // @ts-ignore
+    return this.http.post(this.url+'setDefaultPayment?id='+id);
+  }
+
+
 
 //  end card
 

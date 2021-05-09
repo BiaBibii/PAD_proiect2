@@ -1,26 +1,42 @@
-<div class="contact-clean"   >
-  <form method="post" >
+<div class="contact-clean">
+  <form method="post">
     <h2 class="text-center">Your Command</h2>
-<!--    <h3 style="color: #212121; margin-top: -40px;" class="text-center">No. #112</h3>-->
-    <div class="form-group"><input class="form-control" type="text" name="name" placeholder="Name"></div>
-    <div class="form-group"><input class="form-control" type="email" name="email" placeholder="Email"></div>
+    <!--    <h3 style="color: #212121; margin-top: -40px;" class="text-center">No. #112</h3>-->
+    <div style="padding-bottom: 50px">
+      <div *ngFor="let item of cartItems">
+        <label
+          type="text" name="name" placeholder="Name">
+          {{item.foodProduct.title}}
+        </label>
+        <span style="float: right"> ${{item.subTotal}} </span>
+      </div>
 
+      <hr style=" border-top:2.5px dotted #606060;">
 
-    <div class="custom-control custom-radio">
-      <input type="radio" class="custom-control-input" id="defaultUnchecked" name="defaultExampleRadios" value="there" checked mdbInput>
-      <label class="custom-control-label" for="defaultUnchecked">Pay there</label>
+      <div>
+        <label style="float: right">
+          Total: ${{cartItems[0].cantinaCart.grandTotal}}
+        </label>
+      </div>
     </div>
 
-    <div class="custom-control custom-radio">
-      <input type="radio" class="custom-control-input" id="defaultChecked" name="defaultExampleRadios"   mdbInput>
-      <label class="custom-control-label" for="defaultChecked">Pay with card</label>
+    <div *ngFor="let card of cardList" class="custom-control custom-radio">
+      <input (click)="setDefaultCard(card.id)" type="radio" class="custom-control-input"
+             id="defaultChecked{{card.id}}" name="defaultExampleRadios" value="there"
+             *ngIf="card.defaultPayment" checked>
+      <input (click)="setDefaultCard(card.id)" type="radio" class="custom-control-input"
+             id="defaultUnchecked{{card.id}}" name="defaultExampleRadios" value="there"
+             *ngIf="!card.defaultPayment">
+      <span style="float: right">{{card.cardName}}</span>
+      <label class="custom-control-label" for="defaultUnchecked{{card.id}}">Card no. {{card.cardNumber}}</label>
+
     </div>
 
 
-
-    <div (click)="submit()" class="form-group"><button class="btn btn-primary" type="submit">Order</button></div>
+    <div (click)="placeOrder()" class="form-group">
+      <button class="btn btn-primary" type="submit">Order</button>
+    </div>
   </form>
-
 
 
 </div>
