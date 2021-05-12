@@ -58,7 +58,7 @@ public class UserServiceImpl implements UserService {
 		} else {
 			// Create new user's account
 			 localUser = new User(user.getUsername(), user.getEmail(),
-					encoder.encode(user.getPassword()));
+					encoder.encode(user.getPassword()), user.getFirstName(), user.getLastName());
 			 System.out.println(user.getPassword());
 			
 			 for (Role r : userRoles) {

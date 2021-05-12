@@ -1,23 +1,19 @@
 <app-parallax-image>
-
 </app-parallax-image>
-
 <script src="product.component.ts"></script>
 <div class="restbeef_main_wrapper">
   <div class="restbeef_container">
     <div class="restbeef_content_wrapper restbeef_no_sidebar">
-
       <!-- Content Inner -->
       <div class="restbeef_content">
         <div class="restbeef_tiny">
-
           <!-- Summary Block -->
           <div class="restbeef_block restbeef_poduct_summary restbeef_js_margin" data-margin="0 0 80px 0"
                style="margin: 0px 0px 80px;">
             <div class="restbeef_block_inner">
               <div class="row">
                 <div class="col-6">
-                  <img src="../../assets/img/home.gif" alt="Renzo Rogers">
+                  <img [src]="retrievedImage" alt="Renzo Rogers">
                 </div><!-- .col-6 -->
                 <div class="col-6">
                   <div class="restbeef_poduct_summary_content align_center">
@@ -31,10 +27,8 @@
                         <span>{{item.servingWeight}} g  </span>  <span>{{item.calories}} Cal</span>
                       </p>
 
-
                       <h6>Information</h6>
                       <p> fats:{{item.fats}}, protein:{{item.protein}}, carbohydrates:{{item.carbohydrates}}</p>
-
 
                     </div><!-- .restbeef_poduct_description -->
                     <form class="restbeef_product_order">
@@ -45,7 +39,6 @@
               </div><!-- .row -->
             </div><!-- .restbeef_block_inner -->
           </div><!-- .restbeef_block -->
-
           <!-- Description Block -->
           <div class="restbeef_block restbeef_js_margin" data-margin="0 0 90px 0" style="margin: 0px 0px 90px;">
             <h2 class="align_center">
@@ -57,10 +50,8 @@
             </div><!-- .restbeef_block_inner -->
           </div><!-- .restbeef_block -->
 
-
         </div><!-- .restbeef_tiny -->
       </div><!-- .restbeef_content -->
-
     </div><!-- .restbeef_content_wrapper -->
   </div><!-- .restbeef_container -->
 </div>

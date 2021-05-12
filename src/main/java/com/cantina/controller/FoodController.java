@@ -3,7 +3,9 @@ package com.cantina.controller;
 import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -18,8 +20,11 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.cantina.model.FoodProduct;
+import com.cantina.model.ImageModel;
 import com.cantina.model.dao.FoodProductDao;
+import com.cantina.repository.ImageRepository;
 import com.cantina.service.FoodProductService;
+import com.cantina.service.ImageService;
 
 
 @RestController
@@ -29,6 +34,12 @@ public class FoodController {
 	
 	@Autowired
 	private FoodProductService foodProductService;
+	
+	@Autowired
+	private ImageRepository imageRepository;
+	
+	@Autowired
+	private ImageService imageService;
 	
 	
 	@GetMapping("/foodList")
@@ -68,6 +79,7 @@ public class FoodController {
 			}
 		}
 		
+		
 		return newFoodProduct;
 		
 	}
@@ -106,7 +118,7 @@ public class FoodController {
 		
 		updatedFoodProduct = foodProductService.save(updatedFoodProduct);
 		
-		MultipartFile foodImage = foodProduct.getFoodProductImage();
+		/*MultipartFile foodImage = foodProduct.getFoodProductImage();
 		
 		if(foodImage != null) {
 			try {
@@ -118,7 +130,7 @@ public class FoodController {
 			} catch(Exception e) {
 				e.printStackTrace();
 			}
-		}
+		}*/ 
 		
 		return updatedFoodProduct;
 		
@@ -137,5 +149,26 @@ public class FoodController {
 		
 		return foodProduct;
 	}
+	
+	@PostMapping("/addImage")
+	public ImageModel addImage(@RequestParam("file") MultipartFile file) throws IOException {
+		
+		ImageModel img = new ImageModel(file.getOriginalFilename(), file.getContentType(), file.getBytes());
+		
+		final ImageModel savedImage = imageRepository.save(img);
+		
+		return savedImage;
+	}
+	
+	@GetMapping(path = { "/get/{id}" })
+	public ImageModel getImage(@PathVariable("id") Long id) throws Exception {
+	    
+		final Optional<ImageModel> retrievedImage = imageRepository.findById(id);
+	     
+		ImageModel img = new ImageModel(retrievedImage.get().getName(), retrievedImage.get().getType(), retrievedImage.get().getPic());
+			
+			return img;
+	    }
+	
 	
 }
