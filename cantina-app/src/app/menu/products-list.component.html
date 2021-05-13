@@ -1,6 +1,5 @@
-
 <div *ngFor="let category of categories  ">
-<!--  {{filterByCategory(category)}}-->
+  <!--  {{filterByCategory(category)}}-->
   <app-parallax-image [img]="img+category+'.jpg'" style="height: 15vh !important;">
     <h1 class="text-center" id="h4">{{category}}</h1>
 
@@ -9,16 +8,17 @@
   <div class="container">
 
 
-    <div class="menu-holder" >
+    <div class="menu-holder">
       <div class="row">
 
         <!--menu item-->
         <!--        ngfor-->
         <!--menu item end-->
-        <div class="col-md-6" *ngFor="let item of foodList | filter: category">
-          <app-product-simple [item]="item"></app-product-simple>
-        </div>
-
+        <ng-container *ngFor="let item of foodList | filter: category">
+          <div class="col-md-6" *ngIf="item.active">
+            <app-product-simple [item]="item"></app-product-simple>
+          </div>
+        </ng-container>
 
       </div>
     </div>

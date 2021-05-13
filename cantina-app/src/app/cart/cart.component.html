@@ -2,7 +2,7 @@
   <h1 class="text-center">MY CART</h1>
   <p id="p1" class="text-center">Shop now, eat later! </p>
 </app-parallax-image>
-<div class="container">
+<div class="container" *ngIf="!cartIsEmpty">
   <!-- CHECKOUT TABLE -->
   <div class="row">
     <div class="col-sm-12">
@@ -17,37 +17,27 @@
           <th></th>
         </tr>
 
-        <!--        ng for pentru produseeeeeeee---------------------------------->
+        <!--   ng for pentru produseeeeeeee---------------------------------->
         <tr *ngFor="let item of items" app-cart-item [item]="item"></tr>
 
       </table>
     </div>
   </div>
   <!-- /CHECKOUT TABLE -->
-  <!-- COUPON -->
+
   <div class="row">
     <div class="cart-totals">
       <div class="col-md-12">
 
-
-
-            <button routerLink="/checkout" type="submit" class="btn btn-lg btn-block btn-round btn-d">Proceed to Checkout</button>
-
+        <button routerLink="/checkout" type="submit" class="btn btn-lg btn-block btn-round btn-d">Proceed to Checkout
+        </button>
 
       </div>
 
-
-
     </div>
 
-
-
   </div>
-  <!-- /COUPON -->
-  <!-- CART TOTALS  -->
 
-
-
-
-  <!-- /CART TOTALS  -->
 </div>
+<!--CONTAINER END-->
+<img *ngIf="cartIsEmpty" style="width: 50%; margin-left: 24%" src="../../assets/img/empty-cart.png">

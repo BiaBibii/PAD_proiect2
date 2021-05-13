@@ -43,7 +43,7 @@ export class LoginFormComponent implements OnInit {
         this.userService.logInSuccess(this.form.username);
       },
       error => { // error path
-        this.toastr.error(error.error.message);
+        this.toastr.error("Incorrect username or password");
       });
   }
 

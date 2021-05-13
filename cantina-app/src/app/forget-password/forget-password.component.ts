@@ -9,7 +9,7 @@ import {Router} from "@angular/router";
   styleUrls: ['./forget-password.component.css']
 })
 export class ForgetPasswordComponent implements OnInit {
-  email: string| undefined;
+  email: string|any;
   sentMail: boolean| undefined;
 
   constructor(private router: Router, private toastr: ToastrService, private userService: UserService) { }
@@ -19,6 +19,7 @@ export class ForgetPasswordComponent implements OnInit {
 
   onSubmit(form: any) {
     console.log(form.email);
+
     this.userService.forgetPassword(form.email).subscribe(() => { // success path
         // to do
         this.sentMail = true;
@@ -26,7 +27,7 @@ export class ForgetPasswordComponent implements OnInit {
       },
       error => { // error path
         console.log(error);
-        this.toastr.error(error.error.message);
+        this.toastr.error("Incorrect email");
       });
   }
 }

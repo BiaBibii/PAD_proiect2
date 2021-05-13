@@ -10,6 +10,7 @@ import {Product} from "../models/product";
 export class CartComponent implements OnInit {
   img = "/assets/img/contact_top.jpg"
   items: Product[] | any;
+  cartIsEmpty=false;
 
   constructor(private cartService: CartService) {
   }
@@ -17,10 +18,13 @@ export class CartComponent implements OnInit {
   ngOnInit(): void {
     this.cartService.getCartItems().subscribe((items) => {
         this.items=items;
-        console.log(this.items);
+        if(this.items.length==0)
+          this.cartIsEmpty=true;
+        console.log(this.cartIsEmpty);
       },
       error => {
       console.log(error);
+
       });
   }
 
