@@ -1,8 +1,10 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {not} from "rxjs/internal-compatibility";
 import {CheckoutService} from "../services/checkout.service";
 import {UserService} from "../services/user.service";
 import {Router} from "@angular/router";
+import {ToastrService} from "ngx-toastr";
+import {forEachToken} from "tslint";
 
 @Component({
   selector: 'app-checkout',
@@ -13,8 +15,10 @@ export class CheckoutComponent implements OnInit {
   cartItems: any[] | any;
   cardList: any[] | any;
   defaultCardId: any;
+  private selectedCard=false;
 
-  constructor(private userService: UserService, private checkoutService: CheckoutService, private router:Router) {
+
+  constructor(private toastr: ToastrService, private userService: UserService, private checkoutService: CheckoutService, private router: Router) {
   }
 
   ngOnInit(): void {
@@ -23,6 +27,10 @@ export class CheckoutComponent implements OnInit {
         this.cardList = data.userPaymentList;
         console.log(this.cartItems);
         console.log(this.cardList);
+        for (let i = 0; i < this.cardList.length; i++) {
+          if (this.cardList[i].default_payment == 1)
+            this.selectedCard = true;
+        }
       },
       error => {
         console.log(error);
@@ -30,12 +38,11 @@ export class CheckoutComponent implements OnInit {
   }
 
 
-
-
   setDefaultCard(cardId: any) {
     console.log(cardId);
     this.userService.setDefaultCard(cardId).subscribe(data => {
         console.log(data);
+        this.selectedCard = true;
       },
       error => {
         console.log(error);
@@ -43,12 +50,16 @@ export class CheckoutComponent implements OnInit {
   }
 
   placeOrder() {
-    this.checkoutService.placeOrder().subscribe(data =>{
-    console.log(data);
-    this.router.navigate(['acasa']);
-    },
+    if(this.selectedCard)
+    {
+      this.router.navigate(['/acasa']);
+      this.toastr.success("Your order was placed! <3");
+    }
+    this.checkoutService.placeOrder().subscribe(data => {
+
+      },
       error => {
-      console.log(error);
+        this.toastr.error("You need a card to pay!");
       })
   }
 }

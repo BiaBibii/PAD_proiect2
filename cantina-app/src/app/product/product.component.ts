@@ -4,6 +4,7 @@ import {Product} from "../models/product";
 import {ActivatedRoute, Router} from "@angular/router";
 import {CartService} from "../services/cart.service";
 import {HttpClient} from "@angular/common/http";
+import {ToastrService} from "ngx-toastr";
 @Component({
   selector: 'app-product',
   templateUrl: './product.component.html',
@@ -18,7 +19,7 @@ export class ProductComponent implements OnInit {
   retrieveResonse: any;
   message: string|any;
   imageName: any;
-  constructor(private httpClient: HttpClient, private cartService: CartService, private foodService: FoodService, private router: Router, private route: ActivatedRoute) {
+  constructor(private toastr: ToastrService,private httpClient: HttpClient, private cartService: CartService, private foodService: FoodService, private router: Router, private route: ActivatedRoute) {
   }
   //Gets called when the user clicks on retieve image button to get the image from back end
   getImage(id: any) {
@@ -44,11 +45,15 @@ export class ProductComponent implements OnInit {
       this.getImage(this.id);
     });
   }
+
   addItemToCart() {
     this.cartService.addProductToCart(this.id).subscribe((data) => {
         console.log(data);
+        this.toastr.success("Your product was added successfully!");
+
       },
       error => {
+        this.toastr.error("Please login if you want to order");
         console.log(error);
       });
   }
