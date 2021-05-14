@@ -1,9 +1,9 @@
 package com.cantina.controller;
-
 import java.security.Principal;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,6 +17,7 @@ import com.cantina.model.Order;
 import com.cantina.model.User;
 import com.cantina.model.UserPayment;
 import com.cantina.model.dao.CheckoutDao;
+import com.cantina.model.dao.OrderDao;
 import com.cantina.service.CantinaCartService;
 import com.cantina.service.CartItemService;
 import com.cantina.service.OrderService;
@@ -28,7 +29,8 @@ import com.cantina.utility.MailConstructor;
 @RequestMapping("/api/checkout")
 public class CheckoutController {
 	
-	
+	@Autowired
+    private KafkaTemplate<String, OrderDao> template;
 
 	@Autowired
 	private UserService userService;
@@ -68,7 +70,6 @@ public class CheckoutController {
 	}
 	
 	
-	
 	@PostMapping("/placeCommand")
 	public Order checkoutPost(Principal principal) throws Exception {
 		
@@ -92,6 +93,7 @@ public class CheckoutController {
 		
 		if(userPayment != null && cantinaCart.getGrandTotal().intValue() != 0) {
 			 order = orderService.createOrder(cantinaCart, userPayment, user);
+			 template.send("TestKafka", new OrderDao(user.getUsername(), cantinaCart.getGrandTotal()));
 		}
 	
 		mailSender.send(mailConstructor.constructOrderConfirmationEmail(user, order));
