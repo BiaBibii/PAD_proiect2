@@ -46,7 +46,7 @@ public class CantinaCartController {
 	}
 	
 	@PostMapping("/addProductToCartItem/{id}")
-	public CartItem addProductToCartItem(@PathVariable("id") Long id, Principal principal) {
+	public CartItem addProductToCartItem(@PathVariable("id") Long id, Principal principal) throws Exception {
 		
 		User user = userService.findByUsername(principal.getName());
 		FoodProduct foodProduct = foodProductService.findById(id);
@@ -62,12 +62,16 @@ public class CantinaCartController {
 	}
 	
 	@PostMapping("/updateCartItem")
-	public CartItem updateCantinaCart(@RequestParam("qty") String qty, @RequestParam("id") Long id) {
+	public CartItem updateCantinaCart(@RequestParam("qty") String qty, @RequestParam("id") Long id) throws NumberFormatException, Exception {
 
 		CartItem cartItem = cartItemService.findById(id);
-		cartItem.setQty(Integer.parseInt(qty));
-		cartItem = cartItemService.updateCartItem(cartItem);
-		return cartItem;
+		if(cartItem == null) {
+			throw new Exception("This cart item does not exist!");
+		} else {
+			System.out.println(Integer.parseInt(qty));
+			cartItem = cartItemService.updateCartItem(cartItem, Integer.parseInt(qty));
+			return cartItem;
+		}
 	}
 
 }
