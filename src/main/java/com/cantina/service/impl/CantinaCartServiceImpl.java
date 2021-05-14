@@ -29,7 +29,6 @@ public class CantinaCartServiceImpl implements CantinaCartService {
 		List<CartItem> cartItemList = cartItemService.findByCantinaCart(cantinaCart);
 		
 		for(CartItem cartItem : cartItemList) {
-			cartItemService.updateCartItem(cartItem);
 			cartTotal = cartTotal.add(cartItem.getSubTotal());
 		}
 		

@@ -10,8 +10,8 @@ import com.cantina.model.User;
 public interface CartItemService {
 	
 	List<CartItem> findByCantinaCart(CantinaCart cantinaCart);
-	public CartItem addProductToCartItem(FoodProduct foodProduct, User user);
-	public CartItem updateCartItem(CartItem cartItem);
+	public CartItem addProductToCartItem(FoodProduct foodProduct, User user) throws Exception;
+	public CartItem updateCartItem(CartItem cartItem, int qty) throws Exception;
 	public CartItem findById(Long id);
 	public void deleteItemFromCart(CartItem cartItem);
 	CartItem save(CartItem cartItem);
