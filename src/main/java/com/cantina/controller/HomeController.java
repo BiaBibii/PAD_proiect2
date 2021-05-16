@@ -37,6 +37,7 @@ import com.cantina.model.dao.UserPaymentDao;
 import com.cantina.model.security.ERole;
 import com.cantina.model.security.Role;
 import com.cantina.payload.request.LoginRequest;
+import com.cantina.payload.request.PasswordResetRequest;
 import com.cantina.payload.request.SignupRequest;
 import com.cantina.payload.response.JwtResponse;
 import com.cantina.payload.response.MessageResponse;
@@ -187,9 +188,9 @@ public class HomeController {
 	}
 
 	@PostMapping("/updateUserInformation")
-	public ResponseEntity<?> passwordReset(@RequestBody UserDao user, Principal principal) throws Exception {
+	public ResponseEntity<?> passwordReset(@RequestBody PasswordResetRequest user, Principal principal) throws Exception {
 
-		User currentUser = userService.findByUsername(principal.getName());
+		User currentUser = currentUser(principal);
 
 		if (currentUser == null) {
 			throw new Exception("User not found");
@@ -309,6 +310,28 @@ public class HomeController {
 		
 		return updatedUserPayment;
 		
+	}
+	
+	@GetMapping("/getUserDetails")
+	public UserDao getUserDetails(Principal principal) throws Exception {
+		User user = currentUser(principal);
+		
+		if(userExists(user)) {
+			UserDao userDao = new UserDao(user.getEmail(), user.getUsername(), user.getFirstName(), user.getLastName());
+			return userDao;
+		} else {
+			throw new Exception("User not Found");
+		}
+	}
+	
+	private User currentUser(Principal principal) {
+		return userService.findByUsername(principal.getName());
+	}
+	
+	private boolean userExists(User user) {
+		if(user != null)
+			return true;
+		return false;
 	}
 
 }

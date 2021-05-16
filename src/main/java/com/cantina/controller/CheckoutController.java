@@ -1,5 +1,6 @@
 package com.cantina.controller;
 import java.security.Principal;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +17,7 @@ import com.cantina.model.CartItem;
 import com.cantina.model.Order;
 import com.cantina.model.User;
 import com.cantina.model.UserPayment;
+import com.cantina.model.dao.CartItemDao;
 import com.cantina.model.dao.CheckoutDao;
 import com.cantina.model.dao.OrderDao;
 import com.cantina.service.CantinaCartService;
@@ -71,7 +73,7 @@ public class CheckoutController {
 	
 	
 	@PostMapping("/placeCommand")
-	public Order checkoutPost(Principal principal) throws Exception {
+	public OrderDao checkoutPost(Principal principal) throws Exception {
 		
 		User user = userService.findByUsername(principal.getName());
 		
@@ -90,17 +92,43 @@ public class CheckoutController {
 		}
 		
 		Order order = null;
+		OrderDao orderDao = null;
 		
-		if(userPayment != null && cantinaCart.getGrandTotal().intValue() != 0) {
-			 order = orderService.createOrder(cantinaCart, userPayment, user);
-			 template.send("TestKafka", new OrderDao(user.getUsername(), cantinaCart.getGrandTotal()));
+		if(existsUserPayment(userPayment) && notEmptyCart(cantinaCart)) {
+			order = orderService.createOrder(cantinaCart, userPayment, user);
+			List<CartItem> cartItemList = order.getCartItemList();
+			List<CartItemDao> cartItemDaoList = getProducts(cartItemList);
+			
+			orderDao = new OrderDao(user.getUsername(), cantinaCart.getGrandTotal(), cartItemDaoList);
+			template.send("TestKafka", orderDao);
 		}
 	
 		mailSender.send(mailConstructor.constructOrderConfirmationEmail(user, order));
 		
 		cantinaCartService.clearCantinaCart(cantinaCart);
 	
-		return order;
+		return orderDao;
+	}
+	
+	private boolean existsUserPayment(UserPayment userPayment) {
+		if(userPayment != null)
+			return true;
+		return false;
+	}
+	
+	private boolean notEmptyCart(CantinaCart cantinaCart) {
+		if(cantinaCart.getGrandTotal().intValue() != 0)
+			return true;
+		return false;
 	}
 
+	private List<CartItemDao> getProducts(List<CartItem> cartItemList){
+		List<CartItemDao> cartItemDaoList = new ArrayList<CartItemDao>();
+		for(CartItem cartItem : cartItemList) {
+			CartItemDao cartItemDao = new CartItemDao(cartItem.getQty(), cartItem.getFoodProduct().getTitle());
+			cartItemDaoList.add(cartItemDao);
+		}
+		
+		return cartItemDaoList;
+	}
 }
