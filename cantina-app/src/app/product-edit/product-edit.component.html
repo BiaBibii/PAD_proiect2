@@ -2,12 +2,13 @@
   <th scope="row"><input [checked]="item.active==1" id="active{{item.id}}"  type="checkbox"></th>
   <td class="tm-product-name"  ><input  name="title" id="title{{item.id}}"  value="{{item.title}}"  ></td>
 
-  <td><input  type="number" style="width: 80px" id="servingWeight{{item.id}}" name="servingWeight" id="servingWeight"  value="{{item.servingWeight}}"></td>
-  <td><input type="number" style="width: 80px" id="fats{{item.id}}" name="fats" id="fats" value="{{item.fats}}" ></td>
-  <td><input type="number" style="width: 80px" id="protein{{item.id}}" name="protein" id="protein"  value="{{item.protein}}" ></td>
-  <td><input type="number" style="width: 80px" id="calories{{item.id}}" name="calories" id="calories" value="{{item.calories}}" ></td>
-  <td><input type="number" style="width: 80px" id="carbohydrates{{item.id}}" name="carbohydrates" id="carbohydrates"  value="{{item.carbohydrates}}" ></td>
-  <td><input type="number" style="width: 80px" id="price{{item.id}}" name="price"  id="price" value="{{item.price}}" ></td>
+  <td><input  type="number" style="width: 80px" id="servingWeight{{item.id}}" name="servingWeight"  value="{{item.servingWeight}}"></td>
+  <td><input type="number" style="width: 80px" id="fats{{item.id}}" name="fats" value="{{item.fats}}" ></td>
+  <td><input type="number" style="width: 80px" id="protein{{item.id}}" name="protein"   value="{{item.protein}}" ></td>
+  <td><input type="number" style="width: 80px" id="calories{{item.id}}" name="calories"  value="{{item.calories}}" ></td>
+  <td><input type="number" style="width: 80px" id="carbohydrates{{item.id}}" name="carbohydrates"   value="{{item.carbohydrates}}" ></td>
+  <td><input type="number" style="width: 80px" id="price{{item.id}}" name="price"   value="{{item.price}}" ></td>
+  <td><input type="number" style="width: 80px" id="qty{{item.id}}" name="qty"  value="{{item.qty}}" ></td>
   <td>
     <button (click)="updateItem()">
       <i class="fas fa-refresh"></i>

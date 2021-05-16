@@ -12,11 +12,13 @@ import {User} from "../models/user";
 export class ProfileEditFormComponent implements OnInit {
 
   newUser: User|any={
-    email: "prodan_raul14@yahoo.com",
-    username: "prodi",
-    nume: "Prodan",
-    prenume: "Raul"
+    email:"",
+    username:"",
+    firstName:"",
+    lastName:"",
+    password:""
   };
+
   form: any = {};
 
   constructor(private tokenStorageService: TokenStorageService, private toastr: ToastrService, private userService: UserService) {
@@ -24,13 +26,17 @@ export class ProfileEditFormComponent implements OnInit {
 
   ngOnInit(): void {
     this.form = this.tokenStorageService.getUser();
+    console.log(this.tokenStorageService.getToken());
   }
 
   getUserInfo(){
-    // this.form.email="prodan_raul14@yahoo.com";
-    // this.form.username="prodi";
-    // this.form.nume="Prodan";
-    // this.form.prenume="Raul";
+
+     this.newUser.email= (<HTMLInputElement>document.getElementById("email")).value;
+     this.newUser.username=(<HTMLInputElement>document.getElementById("username")).value;
+     this.newUser.firstName=(<HTMLInputElement>document.getElementById("firstname")).value;
+     this.newUser.lastName=(<HTMLInputElement>document.getElementById("lastname")).value;
+     this.newUser.password=(<HTMLInputElement>document.getElementById("password")).value;
+
   }
 
   updateUserInfo() {

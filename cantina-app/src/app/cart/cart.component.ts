@@ -21,6 +21,7 @@ export class CartComponent implements OnInit {
         if(this.items.length==0)
           this.cartIsEmpty=true;
         console.log(this.cartIsEmpty);
+
       },
       error => {
       console.log(error);

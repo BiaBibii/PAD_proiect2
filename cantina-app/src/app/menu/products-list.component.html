@@ -15,7 +15,7 @@
         <!--        ngfor-->
         <!--menu item end-->
         <ng-container *ngFor="let item of foodList | filter: category">
-          <div class="col-md-6" *ngIf="item.active">
+          <div class="col-md-6" *ngIf="item.active && item.qty!=0">
             <app-product-simple [item]="item"></app-product-simple>
           </div>
         </ng-container>
