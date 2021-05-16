@@ -4,6 +4,8 @@ import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -19,12 +21,17 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.cantina.model.CartItem;
 import com.cantina.model.FoodProduct;
 import com.cantina.model.ImageModel;
+import com.cantina.model.Order;
+import com.cantina.model.dao.CartItemDao;
 import com.cantina.model.dao.FoodProductDao;
+import com.cantina.model.dao.OrderDao;
 import com.cantina.repository.ImageRepository;
 import com.cantina.service.FoodProductService;
 import com.cantina.service.ImageService;
+import com.cantina.service.OrderService;
 
 
 @RestController
@@ -40,6 +47,9 @@ public class FoodController {
 	
 	@Autowired
 	private ImageService imageService;
+	
+	@Autowired
+	private OrderService orderService;
 	
 	
 	@GetMapping("/foodList")
@@ -170,5 +180,40 @@ public class FoodController {
 			return img;
 	    }
 	
+	@GetMapping("/seeOrders")
+	public List<OrderDao> seeOrders(){
+		List<Order> orderList = orderService.getOrderList();
+		List<OrderDao> orderDaoList = getOrderDaoList(orderList);
+		
+		return orderDaoList;
+	}
+	
+	private List<OrderDao> getOrderDaoList(List<Order> orderList){
+		
+		List<OrderDao> orderDaoList = new ArrayList<OrderDao>();
+		
+		for(Order order : orderList) {
+			String username = order.getUser().getUsername();
+			BigDecimal orderTotal = order.getOrderTotal();
+			List<CartItem> cartItemList = order.getCartItemList();
+			
+			List<CartItemDao> cartItemDaoList = getProducts(cartItemList);
+			
+			OrderDao orderDao = new OrderDao(username, orderTotal, cartItemDaoList);
+			orderDaoList.add(orderDao);
+		}
+		
+		return orderDaoList;
+	}
+	
+	private List<CartItemDao> getProducts(List<CartItem> cartItemList){
+		List<CartItemDao> cartItemDaoList = new ArrayList<CartItemDao>();
+		for(CartItem cartItem : cartItemList) {
+			CartItemDao cartItemDao = new CartItemDao(cartItem.getQty(), cartItem.getFoodProduct().getTitle());
+			cartItemDaoList.add(cartItemDao);
+		}
+		
+		return cartItemDaoList;
+	}
 	
 }

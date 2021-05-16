@@ -63,7 +63,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 			.antMatchers("/api/foods/deleteFoodProduct").hasRole("ADMIN")
 			.antMatchers("/api/foods/getFoodProduct").hasAnyRole("ADMIN", "USER")
             .antMatchers("/api/cantinaCart/**").hasRole("USER")
+            .antMatchers("/api/checkout/**").hasRole("USER")
             .antMatchers("/api/updateUserInformation").hasRole("USER")
+            .antMatchers("/api/getUserDetails").hasRole("USER")
             .antMatchers(PUBLIC_MATCHERS)
             .permitAll();
 
