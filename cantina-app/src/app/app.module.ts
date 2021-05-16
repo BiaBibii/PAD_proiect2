@@ -37,6 +37,8 @@ import { ProfileEditFormComponent } from './profile-edit-form/profile-edit-form.
 import { CardsTableComponent } from './cards-table/cards-table.component';
 import { CardProfileComponent } from './card-profile/card-profile.component';
 import { AddNewCardComponent } from './add-new-card/add-new-card.component';
+import { OrderComponent } from './order/order.component';
+import { ProductOrderComponent } from './product-order/product-order.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -67,6 +69,8 @@ import { AddNewCardComponent } from './add-new-card/add-new-card.component';
     CardsTableComponent,
     CardProfileComponent,
     AddNewCardComponent,
+    OrderComponent,
+    ProductOrderComponent,
 
   ],
   imports: [

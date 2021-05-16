@@ -41,6 +41,9 @@
           <li *ngIf="isAdmin && isLogIn" class="nav-item">
             <a class="nav-link" routerLink="/admin" href="#">Adminstration</a>
           </li>
+          <li *ngIf="isAdmin && isLogIn" class="nav-item">
+            <a class="nav-link" routerLink="/order" href="#">Orders</a>
+          </li>
           <li *ngIf="!isAdmin && isLogIn" class="nav-item">
             <a class="nav-link" routerLink="/profile" href="#">Profile</a>
           </li>

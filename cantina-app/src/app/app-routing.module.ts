@@ -16,6 +16,7 @@ import {ProductComponent} from "./product/product.component";
 import {CheckoutComponent} from "./checkout/checkout.component";
 import {ProfileComponent} from "./profile/profile.component";
 import {AddNewCardComponent} from "./add-new-card/add-new-card.component";
+import {OrderComponent} from "./order/order.component";
 
 const routes: Routes = [
   {path: '', redirectTo: 'acasa', pathMatch: 'full'},
@@ -30,7 +31,7 @@ const routes: Routes = [
   {path: 'checkout', component: CheckoutComponent},
   {path: 'profile', component: ProfileComponent},
   {path: 'add-card', component: AddNewCardComponent},
-
+  {path: 'order', component: OrderComponent},
   // { path: '**', component: PageNotFoundComponent},
   {
     path: 'admin',
@@ -41,7 +42,8 @@ const routes: Routes = [
     children: [
       {path: '', component: AdminComponent},
       {path: 'add-product', component: AddProductComponent},
-      {path: 'edit-products/:id', component: EditProductComponent}
+      {path: 'edit-products/:id', component: EditProductComponent},
+
     ]
   }
 ];
