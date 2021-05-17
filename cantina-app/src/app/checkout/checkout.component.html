@@ -22,7 +22,7 @@
 
     <div *ngFor="let card of cardList" class="custom-control custom-radio">
       <input (click)="setDefaultCard(card.id)" type="radio" class="custom-control-input"
-             id="defaultUnchecked{{card.id}}" name="defaultExampleRadios" value="there"
+             id="defaultUnchecked1{{card.id}}" name="defaultExampleRadios" value="there"
              *ngIf="card.defaultPayment" checked >
       <input (click)="setDefaultCard(card.id)" type="radio" class="custom-control-input"
              id="defaultUnchecked{{card.id}}" name="defaultExampleRadios" value="there"

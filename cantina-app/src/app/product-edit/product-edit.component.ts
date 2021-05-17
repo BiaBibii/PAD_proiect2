@@ -41,7 +41,7 @@ export class ProductEditComponent implements OnInit {
     this.item.calories=(<HTMLInputElement>document.getElementById("calories"+this.item.id)).value;
     this.item.carbohydrates=(<HTMLInputElement>document.getElementById("carbohydrates"+this.item.id)).value;
     this.item.price=(<HTMLInputElement>document.getElementById("price"+this.item.id)).value;
-
+    this.item.qty=(<HTMLInputElement>document.getElementById("qty"+this.item.id)).value;
   }
 
   updateItem() {

@@ -29,4 +29,8 @@ export class FoodService {
   updateFoodProduct(upitem: any, id: string){
     return this.http.post(this.url + 'updateFoodProduct/'+id,upitem);
   }
+
+  seeOrders(){
+    return this.http.get(this.url + 'seeOrders');
+  }
 }

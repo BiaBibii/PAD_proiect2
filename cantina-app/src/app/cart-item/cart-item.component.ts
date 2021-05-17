@@ -22,6 +22,9 @@ export class CartItemComponent implements OnInit {
   ngOnInit(): void {
     this.price = this.item.foodProduct.price;
     this.count = this.item.qty;
+    if (this.item.foodProduct.qty == 0) {
+      this.deleteCartItem();
+    }
   }
 
   changeCount() {

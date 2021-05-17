@@ -33,12 +33,14 @@ export class UserService {
   }
 
 
-  register(user: User): Observable<any>{
+  register(user: any): Observable<any>{
     if(user.username==="admin")
       this.role=["admin"];
     else
       this.role=["user"];
     return this.http.post(this.url + 'signup', {
+      firstName: user.firstName,
+      lastName: user.lastName,
       username: user.username,
       email: user.email,
       password: user.password,
@@ -58,6 +60,9 @@ export class UserService {
     return this.http.post(this.url+'updateUserInformation', newInfo);
   }
 
+  getUserDetails(){
+    return this.http.get(this.url+'getUserDetails');
+  }
 
   logInSuccess(username: string) {
     this.isLogin.next(true);
