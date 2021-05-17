@@ -53,7 +53,10 @@ export class ProductComponent implements OnInit {
 
       },
       error => {
-        this.toastr.error("Please login if you want to order");
+        if(error.error.message==="Error: Unauthorized")
+          this.toastr.error("Please login to order!");
+        else
+          this.toastr.error(error.error.message);
         console.log(error);
       });
   }

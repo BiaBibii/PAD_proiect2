@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {Product} from "../models/product";
 import {FoodService} from "../services/food.service";
 import {HttpClient} from "@angular/common/http";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-add-product',
@@ -19,7 +20,7 @@ export class AddProductComponent implements OnInit {
   base64Data: any;
   convertedImage: any;
   image:any={};
-  constructor(private foodService: FoodService, private httpClient: HttpClient) {
+  constructor(private router:Router ,private foodService: FoodService, private httpClient: HttpClient) {
 
   }
 
@@ -37,8 +38,8 @@ export class AddProductComponent implements OnInit {
     }
   }
   onUpload(id: any) {
-  
-   
+
+
     const uploadData = new FormData();
     uploadData.append('file', this.selectedFile, id+'.jpeg');
     this.httpClient.post('http://localhost:8080/api/foods/addImage', uploadData)
@@ -61,6 +62,7 @@ export class AddProductComponent implements OnInit {
     this.foodService.addFoodProduct(this.form).subscribe((data:any) => {
         console.log(data);
         this.onUpload(data.id);
+        this.router.navigate(['/admin']);
       },
       error => {
         console.log(error);

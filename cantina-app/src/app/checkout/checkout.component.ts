@@ -28,9 +28,10 @@ export class CheckoutComponent implements OnInit {
         console.log(this.cartItems);
         console.log(this.cardList);
         for (let i = 0; i < this.cardList.length; i++) {
-          if (this.cardList[i].default_payment == 1)
+          if (this.cardList[i].defaultPayment)
             this.selectedCard = true;
         }
+        console.log(this.selectedCard);
       },
       error => {
         console.log(error);

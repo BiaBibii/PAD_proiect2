@@ -12,16 +12,11 @@ import {Router} from "@angular/router";
 })
 
 export class RegisterFormComponent implements OnInit {
-  nume: string | undefined;
-  prenume: string | undefined;
-  username: string | undefined;
-  email: string | undefined;
-  password: string | undefined;
+
   registered: boolean| undefined;
 
   form: any = {};
 
-  private user: User | undefined;
 
   constructor(private router: Router, private toastr: ToastrService, private userService: UserService) {
   }
