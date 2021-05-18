@@ -1,6 +1,7 @@
 import {Component, Input, OnInit, Output} from '@angular/core';
 import {Product} from "../models/product";
 import {FoodService} from "../services/food.service";
+import {ToastrService} from "ngx-toastr";
 
 
 
@@ -23,7 +24,7 @@ export class ProductEditComponent implements OnInit {
 
 
 
-  constructor(private foodService: FoodService) {
+  constructor(private toastr: ToastrService,private foodService: FoodService) {
   }
 
   ngOnInit(): void {
@@ -48,6 +49,7 @@ export class ProductEditComponent implements OnInit {
     this.setUpItem();
     this.foodService.updateFoodProduct(this.item,this.item.id).subscribe((data)=>{
       console.log(data);
+      this.toastr.success("Item was updated");
     },error => {
       console.log(error);
     });
