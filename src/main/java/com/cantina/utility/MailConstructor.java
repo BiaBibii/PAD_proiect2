@@ -39,7 +39,7 @@ public class MailConstructor {
 			Order order
 			) {
 
-		String message = "\nVa multumim pentru ca ati ales sa mancati la Cantina UPT. Mai jos aveti detaliile comenzi\n"
+		String message = "\nVa multumim pentru ca ati ales sa mancati la Cantina UPT. Mai jos aveti detaliile comenzii\n"
 				+ "Pofta Buna!\n";
 		SimpleMailMessage email = new SimpleMailMessage();
 		email.setTo(user.getEmail());

@@ -1,15 +1,10 @@
 <div class="container tm-mt-big tm-mb-big">
   <div class="row">
     <div class="col-xl-9 col-lg-10 col-md-12 col-sm-12 mx-auto">
-      <div class="tm-bg-primary-dark tm-block tm-block-h-auto">
-        <div class="row">
-          <div class="col-12">
-            <h2 class="tm-block-title d-inline-block">Add Product</h2>
-          </div>
-        </div>
-        <div class="row tm-edit-product-row">
+      <div style="margin-left: 135px" class="tm-bg-primary-dark tm-block tm-block-h-auto">
+        <div style="width: 1200px !important;" class="row tm-edit-product-row">
           <div class="col-xl-6 col-lg-6 col-md-12">
-            <form name="form" #productForm="ngForm" (ngSubmit)="productForm.form.valid && addProduct()"
+            <form   name="form" #productForm="ngForm" (ngSubmit)="productForm.form.valid && addProduct()"
                   action="" class="tm-edit-product-form">
               <div class="form-group mb-3">
                 <label for="name">Product Name
@@ -92,9 +87,7 @@
 
 
               <div class="col-xl-6 col-lg-6 col-md-12 mx-auto mb-4">
-                <div class="tm-product-img-dummy mx-auto">
-                  <i class="fas fa-cloud-upload-alt tm-upload-icon"></i>
-                </div>
+
                 <div class="custom-file mt-3 mb-3">
                   <input name="foodProductImage" id="fileInput" type="file" (change)="onFileChanged($event)">
                 </div>

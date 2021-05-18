@@ -92,8 +92,8 @@ export class UserService {
     return this.roleAs;
   }
 
-  forgetPassword(email: string) {
-    return this.http.post(this.url + 'forgetPassword', email)
+  forgetPassword(user: any) {
+    return this.http.post(this.url + 'forgetPassword', user)
   }
 
 
